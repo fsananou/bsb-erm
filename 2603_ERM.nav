@@ -27,8 +27,12 @@
 \headcommand {\beamer@subsectionentry {0}{1}{6}{7}{Chap1}}
 \headcommand {\slideentry {1}{6}{1}{7/7}{Chap1}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\beamer@partpages {1}{7}}
 \headcommand {\beamer@subsectionpages {7}{7}}
-\headcommand {\beamer@sectionpages {2}{7}}
-\headcommand {\beamer@documentpages {7}}
-\headcommand {\gdef \inserttotalframenumber {7}}
+\headcommand {\beamer@subsectionentry {0}{1}{7}{8}{Chap1}}
+\headcommand {\slideentry {1}{7}{1}{8/8}{Chap1}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\beamer@partpages {1}{8}}
+\headcommand {\beamer@subsectionpages {8}{8}}
+\headcommand {\beamer@sectionpages {2}{8}}
+\headcommand {\beamer@documentpages {8}}
+\headcommand {\gdef \inserttotalframenumber {8}}
