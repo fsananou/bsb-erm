@@ -1,0 +1,215 @@
+\documentclass[aspectratio=169, 11pt]{beamer} % smaller for 10 pt
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+%
+% Choose how your presentation looks.
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\definecolor{myblue}{RGB}{15,75,205}
+\definecolor{myred}{RGB}{164,16,52}
+\usecolortheme[named=myblue]{structure} 
+
+%\geometry{paperwidth=500pt, paperheight=375pt}
+%\usepackage{kpfonts}
+%
+\mode<presentation>
+{
+    \usetheme{default}      %metropolis or try Darmstadt, Madrid, Warsaw, ...
+    \usecolortheme{seahorse} % or try albatross, beaver, crane, ...
+    \usefonttheme{default}  % or try serif, structurebold, ...
+    \setbeamertemplate{navigation symbols}{}
+    \addtobeamertemplate{navigation symbols}{}{%
+        \usebeamerfont{footline}%
+        \usebeamercolor[fg]{footline}%
+        \hspace{100cm}%
+        \insertframenumber $|$\inserttotalframenumber
+    }
+}
+
+\usepackage{pgf, tikz, xcolor} % pour mes dessins latex
+\usetikzlibrary{
+	arrows,%
+	calc,%
+	shapes.geometric,%
+	shapes.misc,%
+	shapes.symbols,%
+	shapes.arrows,%
+	automata,%
+	through,%
+	positioning,%
+	scopes,%
+	decorations.shapes,%
+	decorations.text,%
+	decorations.pathmorphing,%
+	shadows.blur}
+% exemple de petit box
+%\begin{tikzpicture}
+%    \node [fill=cyan, rounded corners=5pt] {Hello};
+%\end{tikzpicture}
+\usepackage{fancybox}
+\usepackage{hyperref}
+\usepackage{natbib} %for advanced citations
+\usepackage{pifont} %for the dings
+\usepackage{ragged2e}
+\usepackage{mathtools}
+
+\usepackage{fontspec}
+\setmainfont{Carlito}
+
+
+% 
+\usepackage{graphicx}
+\newcommand\sbullet[1][.5]{\mathbin{\vcenter{\hbox{\scalebox{#1}{$\bullet$}}}}} % for bullets small, tiny, etc.
+% https://tex.stackexchange.com/questions/389238/is-there-a-black-dot-symbol-that-i-can-use
+
+
+%
+\title{Entreprise risk management}
+%\subtitle{Focus on the bond market}
+\author{ \\ 
+Foly Ananou, PhD \\
+    %\footnotesize{Ph.D. Student, Economics} \\
+    %\scriptsize{Université de Montréal and CIREQ} \\
+   % \vspace{.25 cm}
+   % \normalsize{ \textbf{Supervisor} \\
+    %    Immo Schott} \\
+   % \footnotesize{Assistant Professor, Economics} \\
+   % \scriptsize{Université de Montréal and CIREQ}
+    }
+%\date{\today}
+\date{}
+%\titlegraphic{\includegraphics[height=1.5cm, width=\textwidth]{logo.jpg}}
+
+%-------------------------------------------------------
+\begin{document}
+\begin{frame}[plain] % noframenumbering for beginining at 0
+  % Ph.D. Project
+    %\vspace{.5 cm}
+  %\centering {\tiny \textsc{{\color{myblue} \Ovalbox{\textbf{Oral Exam}}}} }
+  \centering
+  %\includegraphics[height=1cm, width=0.6\textwidth]{logo.jpg}
+    \vspace{1cm}
+
+  \maketitle
+\end{frame}
+
+% Uncomment these lines for an automatically generated outline.
+%\begin{frame}{Outline}
+%  \setbeamertemplate{section in toc}[sections numbered]
+%  \tableofcontents%[hideallsubsections]
+%\end{frame}
+
+%\AtBeginSection[]
+%{
+%    \begin{frame}[plain]{Next in the outline}
+%        \setbeamertemplate{section in toc}[sections numbered]
+%		\tableofcontents[currentsection]%, hidecurrentsubsection, hideothersubsections] %, pausesubsections
+%	\end{frame}
+%}
+
+
+\section{Course objectives}
+
+\subsection{Course objectives}
+\begin{frame}{Course objectives}
+    \begin{itemize}
+        \item[$\bullet$] Master ERM fundamentals : understand the principles, frameworks, and benefits of ERM
+\medskip
+
+\item[$\bullet$] Analyse and measure risk: learn to identify risk, assess and quantify risks using qualitative and quantitative tools 
+\medskip
+
+        \item[$\bullet$] Understand the implementation of ERM and best practices
+        \medskip
+
+
+    \end{itemize}
+\end{frame}
+
+%*****************************************
+\subsection{Chap1}
+\begin{frame}{}
+
+\centering
+\color{blue} \Ovalbox{\textbf{ERM: fundamentals}}
+
+\end{frame}
+%*****************************************
+\subsection{Chap1}
+\begin{frame}{ Understanding risk: preview}
+
+    \begin{itemize}
+        \item [$\bullet$] Let consider the following situations: 
+                               \medskip
+            \begin{itemize}
+                \item[$\bullet$] You are in vacation in Cote d'Ivoire and decide to have an outdoor gathering with friends at the beach. $\rightarrowtail $ What could possibly go wrong ? How likely could this happen ? if it does happen, will it be very harmful ? What can you do to prevent the event from happening or reduce the impact ? 
+                       \medskip
+
+ \item[$\bullet$] You got it involve in a car crash $\rightarrowtail $ Is it necessary someone fault or is it just one of those things that happen in life ? 
+            \end{itemize}
+
+
+    \end{itemize}
+\end{frame}
+
+%*****************************************
+\subsection{Chap1}
+\begin{frame}{Understanduing risk: a definition}
+    \begin{itemize}
+        \item [$\bullet$] Berstein (1996) defines risk as the uncertainty around the outcome of a decision, process or event which can be negative (losses) or positive (benefits or opportunities).
+
+         \centering
+  \includegraphics[height=6cm, width=0.6\textwidth]{sbc.png}
+    \vspace{1cm} 
+
+    \end{itemize}
+\end{frame}
+
+\subsection{Chap1}
+\begin{frame}{Understanduing risk: key characteristics of risk}
+    \begin{itemize}
+        \item [$\bullet$] Uncertainty : outcomes are not guaranteed or predictable
+         \medskip 
+
+                 \item [$\bullet$] Dual nature: risk is not only about threats or losses, it can also includes opportunities          \medskip 
+
+                                  \item [$\bullet$] Measurable dimensions: 
+    \begin{itemize}
+        \item [$\bullet$] \Ovalbox{\textbf{exposure}} $\rightarrowtail $ what is at stake ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{probability}} $\rightarrowtail $ how likely is it possible ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{severity}} $\rightarrowtail $ how bad (or good) coud it get ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{time}} $\rightarrowtail $ how long ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{correlation}} $\rightarrowtail $ can it escalate or drive other risks ? 
+         \medskip 
+    \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\subsection{Chap1}
+\begin{frame}{Understanduing risk: categorization}
+    \begin{itemize}
+
+                 \item [$\bullet$] Can you identify the risk type in the following sceenarios ? (let guess together) 
+    \begin{itemize}
+        \item [$\bullet$] A large international bank experiences a sophisticated ransomware attack that encrypts critical customers data and shuts down online banking services for almost 2W. 
+         \medskip 
+          \item [$\bullet$] The government announces overnight that all cryptoccurrencies transactions are banned taking effect immediately, forcing fintech companies to halt operatiions immediately.  
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{severity}} $\rightarrowtail $ how bad (or good) coud it get ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{time}} $\rightarrowtail $ how long ? 
+         \medskip 
+          \item [$\bullet$] \Ovalbox{\textbf{correlation}} $\rightarrowtail $ can it escalate or drive other risks ? 
+         \medskip 
+    \end{itemize}
+
+    \end{itemize}
+\end{frame}
+
+\end{document}
