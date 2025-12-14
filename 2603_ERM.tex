@@ -26,7 +26,7 @@
         \insertframenumber $|$\inserttotalframenumber
     }
 }
-
+\usepackage{hyperref}
 \usepackage{pgf, tikz, xcolor} % pour mes dessins latex
 \usetikzlibrary{
 	arrows,%
@@ -248,4 +248,66 @@ Foly Ananou, PhD \\
     \end{itemize}
 \end{frame}
 
+\subsection{Chap1}
+\begin{frame}{Understanduing risk: financial risk (credit, liquidity and interest-rate)}
+
+
+    \begin{itemize}
+
+                 \item [$\bullet$] A bank lends money to firms and households, and its funding is essentially based on customers deposits.  
+                 \begin{itemize}
+        \item [$\bullet$] In what situations does the bank lose money ?
+        \begin{itemize}
+            \item [$\square$] Total or partial ? Why ? 
+            \item [$\square$] Will the losses occur immediately or over time ? 
+        \end{itemize} 
+          \medskip 
+          \item [$\bullet$] In what situation does the bank run out of cash ? 
+           \begin{itemize}
+            \item [$\square$] Does that mean the bank is insolvent ?  
+            \item [$\square$] Can the bank fail in that situation ? 
+        \end{itemize} 
+           \medskip 
+          \item [$\bullet$] In what situation does the bank profit fluctuate even there is nothing wrong on its customers side ? 
+          \begin{itemize}
+            \item [$\square$] The bank makes 20-year fixed-rate loans at 2\%. It funds itself with deposits whose interest rate can change every year.
+What happen if interest rate rise to 5\% ? 
+        \end{itemize} 
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\subsection{Chap1}
+\subsection{Chap1}
+\begin{frame}{Understanduing risk: financial risk (credit, liquidity and interest-rate)}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.52\textwidth}
+\begin{itemize}
+    \item [$\bullet$] Commonly used and simplest measures are the Value-at-risk (VaR) and Expected Shortfall (ES)
+
+
+\begin{itemize}
+  \item VaR summarizes potential financial losses within a firm, portfolio,
+  or position over a specific time frame. It reflects the worst expected loss
+  under a given time horizon \ldots
+  \begin{itemize}
+    \item \ldots given a certain confidence level.
+  \end{itemize}
+  \medskip
+  \item Expected shortfall extends VaR by capturing tail risk beyond the VaR cutoff.
+  \item \href{run:var_es_exercices.pdf}{VaR and ES exercices}
+\end{itemize}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\linewidth]{var.png} % <-- change path
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
 \end{document}
+

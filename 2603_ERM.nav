@@ -31,8 +31,18 @@
 \headcommand {\beamer@subsectionentry {0}{1}{7}{8}{Chap1}}
 \headcommand {\slideentry {1}{7}{1}{8/8}{Chap1}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\beamer@partpages {1}{8}}
 \headcommand {\beamer@subsectionpages {8}{8}}
-\headcommand {\beamer@sectionpages {2}{8}}
-\headcommand {\beamer@documentpages {8}}
-\headcommand {\gdef \inserttotalframenumber {8}}
+\headcommand {\beamer@subsectionentry {0}{1}{8}{9}{Chap1}}
+\headcommand {\slideentry {1}{8}{1}{9/9}{Chap1}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\beamer@subsectionpages {9}{9}}
+\headcommand {\beamer@subsectionentry {0}{1}{9}{10}{Chap1}}
+\headcommand {\beamer@subsectionpages {10}{9}}
+\headcommand {\beamer@subsectionentry {0}{1}{10}{10}{Chap1}}
+\headcommand {\slideentry {1}{10}{1}{10/10}{Chap1}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\beamer@partpages {1}{10}}
+\headcommand {\beamer@subsectionpages {10}{10}}
+\headcommand {\beamer@sectionpages {2}{10}}
+\headcommand {\beamer@documentpages {10}}
+\headcommand {\gdef \inserttotalframenumber {10}}

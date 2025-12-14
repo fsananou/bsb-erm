@@ -1,0 +1,228 @@
+% !TEX TS-program = xelatex
+% Compile with XeLaTeX or LuaLaTeX (because of fontspec)
+
+\documentclass[11pt,oneside]{article}
+
+% ------------------------------------------------
+% Layout
+% ------------------------------------------------
+\usepackage[a4paper,margin=1in]{geometry}
+
+% ------------------------------------------------
+% Fonts (XeLaTeX/LuaLaTeX)
+% ------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{Carlito}
+
+% ------------------------------------------------
+% Typography & spacing
+% ------------------------------------------------
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ------------------------------------------------
+% Math
+% ------------------------------------------------
+\usepackage{amsmath,amssymb,mathtools}
+
+% ------------------------------------------------
+% Tables & lists
+% ------------------------------------------------
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% ------------------------------------------------
+% Hyperlinks
+% ------------------------------------------------
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+
+% ------------------------------------------------
+% Title
+% ------------------------------------------------
+\title{\textbf{Risk Measurement Exercises: Value-at-Risk (VaR) and Expected Shortfall (ES)}}
+\author{}
+\date{}
+
+% ------------------------------------------------
+% Convenience macros (optional)
+% ------------------------------------------------
+\newcommand{\VaR}{\mathrm{VaR}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\Loss}{L}
+\newcommand{\R}{R}
+\newcommand{\Normal}{\mathcal{N}}
+
+\begin{document}
+\maketitle
+
+\section*{Context}
+This document contains exercises designed to build intuition and technical skill for
+\textbf{Value-at-Risk (VaR)} and \textbf{Expected Shortfall (ES)}. No prior knowledge of ERM is required.
+
+\bigskip
+\hrule
+\bigskip
+
+% =================================================
+\section{Exercise 1 — Interpreting Value-at-Risk (Conceptual)}
+A trading desk reports a \textbf{1-day VaR at 99\% confidence} of \textbf{€10 million}.
+
+\begin{enumerate}[label=\alph*)]
+  \item Explain in plain language what this number means.
+  \item Out of 100 trading days, on how many days should losses exceed €10 million?
+  \item Does this measure tell you how large losses can be beyond €10 million?
+  \item Can the loss exceed €10 million? Explain.
+\end{enumerate}
+
+\vspace{0.5em}
+\textit{Answer in words; no calculations required.}
+
+% =================================================
+\section{Exercise 2 — Mathematical Definition of VaR}
+Let $\Loss$ be a real-valued random variable denoting the \textbf{loss} of a portfolio over one day
+(so larger $\Loss$ means worse outcomes).
+
+\begin{enumerate}[label=\alph*)]
+  \item Write a mathematical definition of $\VaR_{\alpha}(\Loss)$ for a confidence level $\alpha \in (0,1)$ using the CDF of $\Loss$.
+  \item If $q_\alpha$ denotes the $\alpha$-quantile of $\Loss$, explain the relationship between $\VaR_{\alpha}(\Loss)$ and $q_\alpha$.
+  \item In one sentence, explain why $\VaR$ is a \textbf{quantile} and not an \textbf{expected value}.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 3 — Parametric VaR under Normal Returns (with Numbers)}
+Assume daily \textbf{returns} $\R$ are normally distributed:
+\[
+\R \sim \Normal(\mu,\sigma^2),\quad \mu = 0.10\% = 0.001,\quad \sigma = 2.0\% = 0.02.
+\]
+Assume the portfolio value is €100 million and define daily \textbf{loss} as
+\[
+\Loss = -V\R,\quad V = 100{,}000{,}000.
+\]
+
+\begin{enumerate}[label=\alph*)]
+  \item Compute the \textbf{95\%} 1-day $\VaR$ in euros (use $z_{0.95}=1.645$).
+  \item Compute the \textbf{99\%} 1-day $\VaR$ in euros (use $z_{0.99}=2.326$).
+  \item Briefly explain why increasing the confidence level increases $\VaR$.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 4 — Expected Shortfall under Normality (Formula + Calculation)}
+Continue with Exercise 3 and assume $\Loss$ is normal.
+
+For a standard normal $Z \sim \Normal(0,1)$, you may use:
+\[
+\phi(z)=\frac{1}{\sqrt{2\pi}}e^{-z^2/2}, \qquad \ES_{\alpha}(Z)=\frac{\phi(z_\alpha)}{1-\alpha},
+\]
+where $z_\alpha$ is the $\alpha$-quantile of $Z$ (e.g., $z_{0.95}=1.645$, $z_{0.99}=2.326$).
+
+\begin{enumerate}[label=\alph*)]
+  \item Write $\ES_{\alpha}(\Loss)$ in terms of $\mu,\sigma,V$ and $z_\alpha$.
+  \item Compute $\ES_{0.95}(\Loss)$ in euros (use $\phi(1.645)\approx 0.103$).
+  \item Compute $\ES_{0.99}(\Loss)$ in euros (use $\phi(2.326)\approx 0.026$).
+  \item Explain (intuitively) why $\ES$ captures information that $\VaR$ does not.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 5 — Historical VaR (Order Statistics)}
+You observe the following daily portfolio returns (in \%) over 10 days:
+
+\begin{center}
+\begin{tabular}{cccccccccc}
+\toprule
+-3.2 & -2.5 & -1.8 & -1.2 & -0.9 & -0.4 & 0.1 & 0.4 & 0.7 & 1.0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Assume all observations are equally likely.
+
+\begin{enumerate}[label=\alph*)]
+  \item Sort the returns from worst to best.
+  \item Compute the \textbf{95\% historical VaR} for \textbf{losses} if portfolio value is €50 million.
+  \item State clearly which observation(s) determine the 95\% historical VaR in this small sample.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 6 — Historical Expected Shortfall (Tail Average)}
+Use the same return sample as in Exercise 5 and portfolio value €50 million.
+
+\begin{enumerate}[label=\alph*)]
+  \item Identify the tail observations used to compute $\ES_{0.95}$ (based on your VaR rule from Exercise 5).
+  \item Compute the \textbf{95\% historical Expected Shortfall} in euros.
+  \item Explain in one sentence how ES reacts if the single worst return becomes even worse (e.g. from -3.2\% to -8\%).
+\end{enumerate}
+
+% =================================================
+\section{Exercise 7 — Scaling VaR Over Time (Square-root-of-time)}
+Assume daily returns are i.i.d. normal with mean $0$ and volatility $\sigma_{1d}=1.5\%$.
+Let $V=€200$ million.
+
+\begin{enumerate}[label=\alph*)]
+  \item Compute the 1-day 99\% VaR in euros (use $z_{0.99}=2.326$).
+  \item Under the square-root-of-time rule, compute the 10-day 99\% VaR:
+  \[
+  \sigma_{10d}=\sigma_{1d}\sqrt{10}.
+  \]
+  \item Give two reasons why this scaling can fail in practice (no calculations required).
+\end{enumerate}
+
+% =================================================
+\section{Exercise 8 — Normal vs Fat Tails (Concept + Implications)}
+Two portfolios have the same mean and variance of returns.
+Portfolio A has normally distributed returns.
+Portfolio B has Student-$t$ returns with low degrees of freedom (fat tails).
+
+\begin{enumerate}[label=\alph*)]
+  \item Which portfolio is likely to have higher $\VaR_{0.99}$? Why?
+  \item Which portfolio is likely to have higher $\ES_{0.99}$? Why?
+  \item Explain why ES is generally more sensitive to tail thickness than VaR.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 9 — Properties of Risk Measures (Coherence)}
+A risk measure $\rho(\cdot)$ is called \textbf{coherent} if it satisfies:
+monotonicity, translation invariance, positive homogeneity, and subadditivity.
+
+\begin{enumerate}[label=\alph*)]
+  \item State each of the four coherence properties in words.
+  \item Explain what \textbf{subadditivity} means for diversification.
+  \item True/False (justify briefly): VaR is always subadditive.
+  \item True/False (justify briefly): Expected Shortfall is subadditive.
+\end{enumerate}
+
+% =================================================
+\section{Exercise 10 — VaR vs ES in a Simple Discrete Example (Math)}
+Consider a loss variable $\Loss$ (in €m) with the following distribution:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+Loss $\Loss$ (in €m) & 0 & 1 & 2 & 10 & 50 \\
+Probability & 0.90 & 0.05 & 0.03 & 0.015 & 0.005 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{enumerate}[label=\alph*)]
+  \item Compute $\VaR_{0.95}(\Loss)$.
+  \item Compute $\VaR_{0.99}(\Loss)$.
+  \item Compute $\ES_{0.95}(\Loss)$.
+  \item Compute $\ES_{0.99}(\Loss)$.
+  \item Compare VaR and ES: which one reacts more strongly to the rare €50m loss, and why?
+\end{enumerate}
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{Key Takeaways}
+\begin{itemize}
+  \item $\VaR$ is a \textbf{quantile}: it answers “how bad can it get, most of the time?”
+  \item $\ES$ is a \textbf{tail average}: it answers “how bad is it when it goes really wrong?”
+  \item Two portfolios can have the same $\VaR$ but very different tail risk (captured by $\ES$).
+\end{itemize}
+
+\end{document}
