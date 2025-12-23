@@ -41,8 +41,26 @@
 \headcommand {\beamer@subsectionentry {0}{1}{10}{10}{Chap1}}
 \headcommand {\slideentry {1}{10}{1}{10/10}{Chap1}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@partpages {1}{10}}
 \headcommand {\beamer@subsectionpages {10}{10}}
-\headcommand {\beamer@sectionpages {2}{10}}
-\headcommand {\beamer@documentpages {10}}
-\headcommand {\gdef \inserttotalframenumber {10}}
+\headcommand {\beamer@subsectionentry {0}{1}{11}{11}{Chap1}}
+\headcommand {\beamer@subsectionpages {11}{10}}
+\headcommand {\beamer@subsectionentry {0}{1}{12}{11}{Chap1}}
+\headcommand {\slideentry {1}{12}{1}{11/11}{Chap1}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\beamer@subsectionpages {11}{11}}
+\headcommand {\beamer@subsectionentry {0}{1}{13}{12}{Chap1}}
+\headcommand {\beamer@subsectionpages {12}{11}}
+\headcommand {\beamer@subsectionentry {0}{1}{14}{12}{Chap1}}
+\headcommand {\slideentry {1}{14}{1}{12/12}{Chap1}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\beamer@subsectionpages {12}{12}}
+\headcommand {\beamer@subsectionentry {0}{1}{15}{13}{Chap1}}
+\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{1}{16}{13}{Chap1}}
+\headcommand {\slideentry {1}{16}{1}{13/13}{Chap1}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\beamer@partpages {1}{13}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@sectionpages {2}{13}}
+\headcommand {\beamer@documentpages {13}}
+\headcommand {\gdef \inserttotalframenumber {13}}

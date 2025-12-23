@@ -57,6 +57,10 @@
 
 \usepackage{fontspec}
 \setmainfont{Carlito}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{fontawesome5} % for icons
+\setbeamertemplate{navigation symbols}{}
 
 
 % 
@@ -259,19 +263,19 @@ Foly Ananou, PhD \\
                  \begin{itemize}
         \item [$\bullet$] In what situations does the bank lose money ?
         \begin{itemize}
-            \item [$\square$] Total or partial ? Why ? 
-            \item [$\square$] Will the losses occur immediately or over time ? 
+            \item[$\bullet$]  Total or partial ? Why ? 
+            \item[$\bullet$]  Will the losses occur immediately or over time ? 
         \end{itemize} 
           \medskip 
           \item [$\bullet$] In what situation does the bank run out of cash ? 
            \begin{itemize}
-            \item [$\square$] Does that mean the bank is insolvent ?  
-            \item [$\square$] Can the bank fail in that situation ? 
+            \item[$\bullet$] Does that mean the bank is insolvent ?  
+            \item[$\bullet$] Can the bank fail in that situation ? 
         \end{itemize} 
            \medskip 
           \item [$\bullet$] In what situation does the bank profit fluctuate even there is nothing wrong on its customers side ? 
           \begin{itemize}
-            \item [$\square$] The bank makes 20-year fixed-rate loans at 2\%. It funds itself with deposits whose interest rate can change every year.
+            \item [$\bullet$] The bank makes 20-year fixed-rate loans at 2\%. It funds itself with deposits whose interest rate can change every year.
 What happen if interest rate rise to 5\% ? 
         \end{itemize} 
     \end{itemize}
@@ -287,18 +291,19 @@ What happen if interest rate rise to 5\% ?
     \item [$\bullet$] Commonly used and simplest measures are the Value-at-risk (VaR) and Expected Shortfall (ES)
 \medskip
 \begin{itemize}
-  \item VaR summarizes potential financial losses within a firm, portfolio,
+  \item[$\bullet$] VaR summarizes potential financial losses within a firm, portfolio,
   or position over a specific time frame. It reflects the worst expected loss
   under a given time horizon \ldots
   \begin{itemize}
-    \item \ldots given a certain confidence level.
+    \item[] \ldots given a certain confidence level.
   \end{itemize}
   \medskip
-  \item Expected shortfall extends VaR by capturing tail risk beyond the VaR cutoff.
+  \item[$\bullet$] Expected shortfall extends VaR by capturing tail risk beyond the VaR cutoff.
    \medskip
-  \item \href{https://github.com/fsananou/bsb-erm/blob/ebbd7723a3ce60ced169f337c8f0b4d8e8cad564/var_es_exercices.pdf}{\ovalbox{VaR and ES exercices}}
 \end{itemize}
 \end{itemize}
+ \href{https://github.com/fsananou/bsb-erm/blob/ebbd7723a3ce60ced169f337c8f0b4d8e8cad564/var_es_exercices.pdf}{\ovalbox{VaR and ES exercices}}
+
 \end{column}
 
 \begin{column}{0.48\textwidth}
@@ -309,7 +314,76 @@ What happen if interest rate rise to 5\% ?
 
 \end{frame}
 
+\subsection{Chap1}
+\subsection{Chap1}
+\begin{frame}{ERM fundamentals}
+
+    \begin{itemize}
+
+                 \item [$\bullet$] Lam (2003) "ERM is all about integration: ... an integrated risk organisation, ... the integration 
+                 of risk transfer strategies, ... the integration of risk management into the business process of a company"
+          \medskip 
+          \item [$\bullet$] Kemp and Patel (2011) define ERM as a framework, using risk as the core building block, to enable key business decisions 
+          to be aligned with inherent riskIt involes hoslistic management of risk and management of business/portfolio as an enterprise. 
+           \medskip 
+          \item [$\bullet$] Casualty Actuarial Society (2003) "The discipline by which and organization in any industry assesses, controls, 
+          exploits, finances and monitors risks from all sources for the purpose of increasing the organization's short and long-term value to its stakeholders."  
+          \medskip 
+\end{itemize}
+             \ovalbox{Discussion: Does ERM create value for a firm ? Why and how ? }
+
+\end{frame}
+
+\subsection{Chap1}
+\subsection{Chap1}
+\begin{frame}{ERM fundamentals}
+     \includegraphics[width=\linewidth]{erm_process.png}
+\vspace{1em}
+\ovalbox{Discussion: Is ERM a quantitative or a qualitative tool ?}
+
+\end{frame}
+
+
+\subsection{Chap1}
+\subsection{Chap1}
+\begin{frame}{ERM fundamentals}
+    \begin{itemize}
+
+\item[$\bullet$]  ERM has evolved from a control-oriented function
+to a strategic framework focused on value creation.
+
+\medskip
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{Compliance and risk control} :
+    Initial focus on regulatory compliance and adherence to limits, with risks
+    managed in silos.
+
+    \item [$\bullet$]\textbf{Loss minimisation} :
+    Emphasis on reducing downside outcomes through basic mitigation tools and
+    operational controls.
+
+    \item[$\bullet$] \textbf{Risk management} :
+    Development of structured risk identification, assessment, and mitigation
+    processes across the organization.
+
+    \item[$\bullet$] \textbf{Risk measurement} :
+    Introduction of quantitative tools such as economic capital models, stress
+    testing, and scenario analysis to measure risk consistently.
+
+    \item [$\bullet$]\textbf{Strategic integration (today)} :
+    Integration of risk considerations into strategic decisions, capital
+    allocation, and performance management.
+
+    \item[$\bullet$] \textbf{Risk optimisation and value creation} :
+    State-of-the-art ERM treats risk as a resource to be actively allocated in
+    order to optimise risk--return trade-offs and support long-term value
+    creation.
+\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
 
 \end{document}
-
-\Ovalbox{
