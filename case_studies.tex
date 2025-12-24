@@ -1,0 +1,207 @@
+% !TEX TS-program = xelatex
+% Compile with XeLaTeX or LuaLaTeX (because of fontspec)
+
+\documentclass[11pt,oneside]{article}
+
+% ------------------------------------------------
+% Layout
+% ------------------------------------------------
+\usepackage[a4paper,margin=1in]{geometry}
+
+% ------------------------------------------------
+% Fonts (XeLaTeX/LuaLaTeX)
+% ------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{Carlito}
+
+% ------------------------------------------------
+% Typography & spacing
+% ------------------------------------------------
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ------------------------------------------------
+% Math
+% ------------------------------------------------
+\usepackage{amsmath,amssymb,mathtools}
+
+% ------------------------------------------------
+% Tables & lists
+% ------------------------------------------------
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% ------------------------------------------------
+% Hyperlinks
+% ------------------------------------------------
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+
+% ------------------------------------------------
+% Title
+% ------------------------------------------------
+\title{\textbf{Risk Measurement Exercises: Value-at-Risk (VaR) and Expected Shortfall (ES)}}
+\author{}
+\date{}
+
+% ------------------------------------------------
+% Convenience macros (optional)
+% ------------------------------------------------
+\newcommand{\VaR}{\mathrm{VaR}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\Loss}{L}
+\newcommand{\R}{R}
+\newcommand{\Normal}{\mathcal{N}}
+
+
+\title{\textbf{Enterprise Risk Management: Applied Case Studies}}
+\author{Course: Enterprise Risk Management}
+\date{}
+
+\begin{document}
+\maketitle
+
+\onehalfspacing
+
+\section{Introduction}
+
+Enterprise Risk Management (ERM) is often presented as a comprehensive
+framework combining governance, quantitative tools, and strategic
+decision-making. In practice, many organizations formally comply with ERM
+requirements while still experiencing severe losses or strategic failures.
+
+The objective of the following case studies is to examine situations in which
+ERM frameworks and quantitative risk metrics were in place, yet proved
+insufficient. Students are asked to compute standard risk measures and then
+analyze why ERM failed to prevent losses.
+
+\section{Case Study 1: Market Risk, Value-at-Risk and Risk Appetite}
+
+\subsection{Context}
+
+A mid-sized bank operates a trading desk managing a diversified market-risk
+portfolio with a total market value of \textbf{€100 million}. The bank has
+implemented an ERM framework centered on quantitative risk limits, with
+Value-at-Risk (VaR) as the primary risk metric.
+
+The desk is considered compliant as long as its estimated VaR remains below
+the approved limit.
+
+\subsection{Portfolio Composition}
+
+The portfolio consists of the following exposures:
+\begin{itemize}
+    \item Equity exposure: €60 million invested in a broad equity index.
+    \item Interest rate exposure: €40 million in a 10-year government bond,
+    managed through duration exposure.
+\end{itemize}
+
+\subsection{Risk Parameters}
+
+The following risk parameters are provided:
+\begin{itemize}
+    \item Daily equity volatility: 2\%.
+    \item Daily volatility of the 10-year yield: 5 basis points.
+    \item Correlation between equity returns and yield changes: 0.
+    \item Interest rate sensitivity: a \textbf{+1 bp} increase in yields results
+    in a \textbf{€0.20 million loss}.
+\end{itemize}
+
+Assume normally distributed risk factors and a one-day holding period.
+
+\subsection{ERM Constraint}
+
+The bank has set the following limit:
+\begin{itemize}
+    \item 1-day 99\% Value-at-Risk limit: \textbf{€3.0 million}.
+\end{itemize}
+
+\subsection{Questions}
+
+\begin{enumerate}
+    \item Compute the 1-day 99\% Value-at-Risk of the portfolio using a
+    variance--covariance approach.
+    \item Determine whether the trading desk complies with the VaR limit.
+    \item Consider the following stress scenario:
+    \begin{itemize}
+        \item Equity index decline of 8\%.
+        \item Increase of 30 basis points in the 10-year yield.
+    \end{itemize}
+    Compute the portfolio loss under this scenario.
+    \item Explain why losses of this magnitude may occur despite compliance
+    with the VaR limit.
+    \item Identify at least two weaknesses of relying exclusively on VaR from
+    an ERM perspective.
+\end{enumerate}
+
+\section{Case Study 2: Expected Shortfall, Governance and Escalation}
+
+\subsection{Context}
+
+Following internal reviews, the bank complements VaR with Expected Shortfall
+(ES) reporting to better capture tail risk. ES is monitored daily and compared
+against a predefined limit. Breaches are supposed to trigger immediate
+escalation to senior management.
+
+\subsection{Observed Portfolio Performance}
+
+The daily profit-and-loss (P\&L) of the portfolio over the last 12 trading days
+(in millions of euros) is reported below:
+
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Day & P\&L (€m) \\
+\midrule
+1  & +0.6 \\
+2  & -1.1 \\
+3  & +0.4 \\
+4  & -2.3 \\
+5  & +0.9 \\
+6  & -0.8 \\
+7  & -3.5 \\
+8  & +0.5 \\
+9  & -1.7 \\
+10 & -4.2 \\
+11 & -0.6 \\
+12 & -6.8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{ERM Rules}
+
+The ERM framework specifies:
+\begin{itemize}
+    \item 1-day 99\% Expected Shortfall limit: \textbf{€4.0 million}.
+    \item Mandatory escalation in case of a breach.
+\end{itemize}
+
+\subsection{Questions}
+
+\begin{enumerate}
+    \item Sort the P\&L distribution from worst to best.
+    \item Compute the empirical 1-day 99\% Expected Shortfall.
+    \item Determine whether the ES limit is breached.
+    \item The large loss observed on Day 12 occurred without prior escalation.
+    Identify possible failures related to:
+    \begin{itemize}
+        \item Risk reporting,
+        \item Governance architecture,
+        \item Incentives or risk culture.
+    \end{itemize}
+    \item Explain why replacing VaR with Expected Shortfall does not, by itself,
+    guarantee effective ERM.
+\end{enumerate}
+
+\section{Conclusion}
+
+These case studies illustrate that the presence of quantitative risk measures
+and formal ERM limits does not ensure effective risk management. Understanding
+why ERM fails requires analyzing not only models and metrics, but also risk
+appetite definition, governance structures, escalation mechanisms, and
+organizational incentives.
+
+\end{document}
