@@ -1,6 +1,11 @@
 \documentclass[aspectratio=169, 10pt]{beamer} % smaller for 10 pt
 \usepackage[english]{babel}
 \usepackage[utf8x]{inputenc}
+
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\bullet$}
+\setbeamertemplate{itemize subsubitem}{$\bullet$}
+
 %
 % Choose how your presentation looks.
 % For more themes, color themes and font themes, see:
@@ -480,7 +485,7 @@ to a strategic framework focused on value creation.
 
 \subsection{Chap1}
 \subsection{Chap1}
-\begin{frame}{ERM: Framework, Architecture and Process (recap)}
+\begin{frame}{ERM: Framework, Architecture and Process (synthesis)}
 
 \begin{description}
     \item[\textbf{Framework}] Defines principles, boundaries, and acceptable
@@ -498,8 +503,390 @@ Effective ERM requires consistency between what is allowed
 (framework), who is accountable (architecture), and how risks are
 managed (process).
 \end{block}
+\medskip
+
+ \href{https://github.com/fsananou/bsb-erm/blob/main/case_studies.pdf}{\ovalbox{Cases studies: why ERM fails ? }}
 
 \end{frame}
 
+\subsection{Chap1}
+\subsection{Chap1}
+\begin{frame}{Why ERM Fails in Practice (synthesis)}
+\begin{itemize}
+ \item[$\bullet$] ERM failures typically reflect governance and judgment issues rather than
+technical deficiencies.
+
+\medskip
+
+\begin{itemize}
+    \item[$\bullet$] \textbf{ERM reduced to compliance} \\
+    Frameworks exist formally but do not influence strategic decisions.
+
+    \item[$\bullet$] \textbf{Unclear or ineffective risk appetite} \\
+    Limits are vague, ignored, or overridden during growth phases.
+
+    \item[$\bullet$] \textbf{Misaligned incentives} \\
+    Short-term performance is rewarded while risk accumulation is not penalized.
+
+    \item[$\bullet$] \textbf{Weak challenge and escalation} \\
+    Risk signals are diluted, delayed, or dismissed when inconvenient.
+
+    \item[$\bullet$] \textbf{Illusion of control through models} \\
+    Quantitative tools create false confidence and mask tail risks.
+\end{itemize}
+\end{itemize}
+
+\begin{block}{Key takeaway}
+ERM fails when risk governance is disconnected from decision-making,
+incentives, and organizational culture.
+\end{block}
+
+\end{frame}
+
+%*****************************************
+\subsection{Chap1}
+\begin{frame}{}
+
+\centering
+\color{blue} \Ovalbox{\textbf{ERM frameworks and architecture}}
+
+\end{frame}
+%*****************************************
+
+\begin{frame}{ERM Frameworks: What problem do they Solve?}
+
+Organizations face many risks simultaneously, across units, time horizons,
+and objectives.
+
+\medskip
+
+ERM frameworks exist to solve three coordination problems:
+
+\begin{itemize}
+    \item \textbf{Cognitive problem:} Different actors perceive and describe
+    risk differently.
+    
+    \item \textbf{Organizational problem:} Risks are generated locally but
+    consequences are enterprise-wide.
+    
+    \item \textbf{Governance problem:} Risk-taking decisions are often separated
+    from risk-bearing consequences.
+\end{itemize}
+
+\begin{block}{Core function}
+An ERM framework aligns perception, responsibility, and decision-making
+around risk.
+\end{block}
+
+\end{frame}
+\begin{frame}{COSO ERM: Why the control orientation?}
+
+COSO ERM emerged from repeated failures in financial reporting and governance.
+
+\medskip
+
+\begin{itemize}
+    \item The primary concern is \textbf{accountability}: who is responsible
+    when objectives are missed?
+    
+    \item Risk is framed as a \textbf{source of deviation} from expected outcomes.
+    
+    \item Emphasis is placed on documentation, traceability, and auditability.
+    
+    \item The framework assumes that better controls reduce unacceptable risk.
+\end{itemize}
+
+\begin{block}{Implicit assumption}
+Risk failures are largely due to weak controls or poor oversight.
+\end{block}
+
+\end{frame}
+\begin{frame}{COSO ERM: Where the logic breaks}
+
+The control-based logic has structural limits.
+
+\medskip
+
+\begin{itemize}
+    \item Not all risks are controllable ex ante (strategic, systemic, tail risks).
+    
+    \item Excessive controls can delay decisions and suppress risk signals.
+    
+    \item Documentation may substitute for genuine challenge.
+    
+    \item Strategic risk-taking can be discouraged even when value-creating.
+\end{itemize}
+
+\begin{block}{Key insight}
+Strong controls do not guarantee good risk decisions.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{ISO 31000: Risk as a Decision Problem}
+
+ISO 31000 starts from a fundamentally different premise.
+
+\medskip
+
+\begin{itemize}
+    \item Risk is defined as the \textbf{effect of uncertainty on objectives},
+    not merely as potential loss.
+    
+    \item Risk management is meaningful only if it influences decisions.
+    
+    \item There is no universally optimal risk process — context matters.
+    
+    \item Judgment is unavoidable and must be structured, not eliminated.
+\end{itemize}
+
+\begin{block}{Implicit assumption}
+Risk cannot be fully controlled, only understood and governed.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{ISO 31000: Why flexibility becomes a weakness}
+
+Without strong governance, ISO-based ERM can drift.
+
+\medskip
+
+\begin{itemize}
+    \item Risk appetite remains qualitative and non-binding.
+    
+    \item Different units interpret principles inconsistently.
+    
+    \item Risk discussions lack escalation and enforcement.
+    
+    \item Strategic narratives replace quantitative discipline.
+\end{itemize}
+
+\begin{block}{Failure mode}
+Risk is discussed but not constrained.
+\end{block}
+
+\end{frame}
+
+%========================
+% Slide 1: COSO vs ISO 31000 (deep comparison)
+%========================
+\begin{frame}{COSO ERM vs ISO 31000: Two philosophies of ERM}
+
+\begin{columns}[T,onlytextwidth]
+
+%--- COSO column
+\begin{column}{0.5\textwidth}
+    \begin{itemize}
+  \item[$\bullet$]  \textbf{COSO ERM}
+
+\begin{itemize}
+  \item[$\bullet$] \textbf{Primary logic: accountability and control} --
+  Designed to reduce deviations from objectives through clear governance,
+  internal control, and traceability.
+
+  \item[$\bullet$] \textbf{Strength: auditability and discipline} --
+  Produces roles, documentation, and evidentiary trails that work well in
+  regulated or listed environments.
+
+  \item[$\bullet$] \textbf{Typical failure mode: compliance substitution} --
+  When treated as a checklist, the firm may appear ``in control'' while
+  strategic and tail risks remain unchallenged.
+\end{itemize}
+    \end{itemize}
+
+\end{column}
+
+%--- ISO column
+\begin{column}{0.5\textwidth}
+        \begin{itemize}
+\item \textbf{ISO 31000}
+
+\begin{itemize}
+  \item[$\bullet$] \textbf{Primary logic: decisions under uncertainty} --
+  Risk is the effect of uncertainty on objectives; ERM help shape choices, trade-offs, and priorities.
+
+  \item[$\bullet$] \textbf{Strength: integration and flexibility} --
+  Principles-based design encourages embedding risk into strategy, planning,
+  and day-to-day decisions across diverse contexts.
+
+  \item[$\bullet$] \textbf{Typical failure mode: dilution and inconsistency} --
+  Without strong governance, principles can become vague, unevenly applied,
+  and non-binding for risk-taking.
+\end{itemize}
+    \end{itemize}
+\end{column}
+
+\end{columns}
+
+\begin{block}{Takeaway}
+COSO $\rightarrowtail $ \emph{discipline, controls, and assurance} are
+the priority; ISO $\rightarrowtail $ \emph{decision integration and strategic
+adaptation} are the priority. 
+\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}{Risk apetite: How it works in practice}
+
+Risk appetite is a \textbf{governance mechanism}, not a slogan.
+
+\medskip
+
+\begin{itemize}
+    \item It translates strategic ambition into acceptable uncertainty.
+    
+    \item It constrains risk-taking before losses materialize.
+    
+    \item It provides a reference for escalation and challenge.
+    
+    \item It must be expressed in both qualitative and quantitative terms.
+\end{itemize}
+
+\begin{block}{Key mechanism}
+Risk appetite defines when risk-taking becomes a governance issue.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Confusing Appetite, Tolerance and Capacity is dangerous}
+
+These concepts play different roles in ERM.
+
+\medskip
+
+\begin{itemize}
+    \item Risk appetite reflects \textbf{strategic choice}.
+    
+    \item Risk tolerance reflects \textbf{operational control}.
+    
+    \item Risk capacity reflects \textbf{survival constraints}.
+\end{itemize}
+
+\medskip
+
+\begin{itemize}
+    \item Exceeding tolerance requires management action.
+    \item Exceeding appetite signals strategic drift.
+    \item Exceeding capacity threatens viability.
+\end{itemize}
+
+\begin{block}{Crisis pattern}
+Most failures occur when appetite silently converges toward capacity.
+\end{block}
+
+\end{frame}
+
+\begin{frame}{ERM Maturity models: The hidden trap}
+
+ERM maturity models suggest linear progress.
+
+\medskip
+
+\begin{itemize}
+    \item They implicitly assume that more integration is always better.
+    
+    \item They reward formalization over effectiveness.
+    
+    \item They can encourage cosmetic improvements.
+    
+    \item They underestimate the role of context and strategy.
+\end{itemize}
+
+\begin{block}{Key warning}
+High ERM maturity does not immunize against failure.
+\end{block}
+
+\end{frame}
+\begin{frame}{Why ERM frameworks become box-ticking}
+
+Box-ticking is a rational organizational outcome.
+
+\medskip
+
+\begin{itemize}
+    \item Framework adoption is often driven by regulation or reputation.
+    
+    \item Incentives favor formal compliance over substantive challenge.
+    
+    \item Responsibility for risk is diffused.
+    
+    \item Negative information is costly to escalate.
+\end{itemize}
+
+\begin{block}{Structural insight}
+Box-ticking is not a mistake — it is a governance failure.
+\end{block}
+
+\end{frame}
+%========================
+% Slide 2: What makes an effective ERM framework?
+%========================
+\begin{frame}{What Makes an Effective ERM Framework?}
+
+\begin{itemize}
+\item An effective ERM framework is not the presence of documents; it is a system
+that \textbf{changes decisions} and \textbf{constrains risk-taking} before losses occur.
+
+\begin{itemize}
+  \item[$\bullet$] \textbf{Clear objectives and risk taxonomy} --
+  Risks are defined relative to objectives, using a common language that avoids
+  silo interpretations and enables aggregation at enterprise level.
+
+  \item[$\bullet$] \textbf{Explicit risk appetite linked to strategy} --
+  Appetite expresses the acceptable uncertainty required to pursue strategy;
+  it becomes meaningful when translated into operational limits and triggers.
+
+  \item[$\bullet$] \textbf{Decision-usefulness (not reporting volume)} --
+  Risk information must answer: \emph{What changes in our decision today?}
+  Otherwise ERM becomes descriptive rather than prescriptive.
+
+  \item[$\bullet$] \textbf{Escalation and consequence mechanisms} --
+  Effective frameworks define when issues must be escalated and what actions
+  follow (reduce exposure, revise limits, halt activity, strengthen controls).
+
+  \item[$\bullet$] \textbf{Balance of quantitative and judgment} --
+  Models structure discipline; judgment handles regime shifts, tail risks, and
+  what data cannot capture.
+\end{itemize}
+\end{itemize}
+
+\begin{block}{Litmus test}
+If risk appetite breaches do not trigger action and debate at the right level,
+the framework is cosmetic.
+\end{block}
+
+\end{frame}
+%========================
+% Slide 3: Transition to Architecture
+%========================
+\begin{frame}{Transition: From Framework to Architecture}
+
+A framework specifies \textbf{what should happen}.  
+Architecture determines \textbf{who makes it happen} and \textbf{how power and information flow}.
+
+\medskip
+
+\begin{itemize}
+  \item[$\bullet$] \textbf{Who owns risk? (risk-taking authority)}\\
+  Business units typically originate risk; architecture clarifies the limits of
+  their autonomy and when decisions become governance issues.
+
+  \item[$\bullet$] \textbf{Who challenges risk? (independent oversight)}\\
+  The CRO and second-line functions must have independence, access, and standing
+  to challenge decisions that conflict with appetite or capacity.
+
+  \item[$\bullet$] \textbf{Who assures risk controls? (independent assurance)}\\
+  Internal audit validates that controls and reporting are effective, not only
+  present, and that exceptions are properly managed.
+
+  \item[$\bullet$] \textbf{How escalation works under pressure}\\
+  Architecture defines escalation paths that still function when incentives
+  push toward ignoring bad news.
+\end{itemize}
+
+\end{frame}
 
 \end{document}
