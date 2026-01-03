@@ -1,7 +1,7 @@
 % !TEX TS-program = xelatex
 % Compile with XeLaTeX or LuaLaTeX (because of fontspec)
 
-\documentclass[11pt,oneside]{article}
+\documentclass[10pt,oneside]{article}
 
 % ------------------------------------------------
 % Layout
@@ -56,7 +56,7 @@
 \newcommand{\Normal}{\mathcal{N}}
 
 
-\title{\textbf{Enterprise Risk Management: Applied Case Studies}}
+\title{\textbf{Applied Case Studies}}
 \author{Course: Enterprise Risk Management}
 \date{}
 
@@ -65,17 +65,6 @@
 
 \onehalfspacing
 
-\section{Introduction}
-
-Enterprise Risk Management (ERM) is often presented as a comprehensive
-framework combining governance, quantitative tools, and strategic
-decision-making. In practice, many organizations formally comply with ERM
-requirements while still experiencing severe losses or strategic failures.
-
-The objective of the following case studies is to examine situations in which
-ERM frameworks and quantitative risk metrics were in place, yet proved
-insufficient. Students are asked to compute standard risk measures and then
-analyze why ERM failed to prevent losses.
 
 \section{Case Study 1: Market Risk, Value-at-Risk and Risk Appetite}
 
@@ -196,12 +185,321 @@ The ERM framework specifies:
     guarantee effective ERM.
 \end{enumerate}
 
-\section{Conclusion}
 
-These case studies illustrate that the presence of quantitative risk measures
-and formal ERM limits does not ensure effective risk management. Understanding
-why ERM fails requires analyzing not only models and metrics, but also risk
-appetite definition, governance structures, escalation mechanisms, and
-organizational incentives.
+
+\section{Case study 3 : signals without escalation}
+
+\subsection{Context}
+
+A mid-sized European bank operates across corporate lending, structured finance,
+and capital markets activities. The institution is considered well managed and
+has experienced several years of stable profitability and moderate growth.
+
+The bank is subject to prudential supervision and regularly undergoes internal
+and external reviews of its risk management practices. No material weaknesses
+have been identified in recent assessments.
+
+\subsection{Risk governance practices}
+
+Risk management within the bank is organized around a centralized risk function
+that operates independently from business units. Risk policies define limits
+for key risk categories and specify reporting obligations at different levels of
+management.
+
+Senior management receives periodic risk reports summarizing:
+\begin{itemize}
+    \item[$\bullet$] utilization of risk limits,
+    \item[$\bullet$] stress-test outcomes,
+    \item[$\bullet$] qualitative risk assessments prepared by risk functions.
+\end{itemize}
+
+A committee involving senior executives meets regularly to review these reports
+and discuss emerging risks.
+
+\subsection{Strategic development}
+
+Over a two-year period, the bank expanded rapidly in structured finance and
+specialized lending activities. Individual transactions complied with existing
+risk limits and approval procedures.
+
+However, several features characterized this expansion:
+\begin{itemize}
+    \item[$\bullet$] repeated concentration in similar counterparties and sectors,
+    \item[$\bullet$] increasing reliance on favorable macroeconomic assumptions,
+    \item[$\bullet$] frequent use of exceptions and temporary adjustments to
+    internal limits.
+\end{itemize}
+
+While no formal breaches were recorded, internal risk assessments increasingly
+highlighted rising portfolio sensitivity to adverse scenarios.
+
+\subsection{Risk signals}
+
+Risk analysts noted that portfolio-level exposures were approaching internally
+defined thresholds under adverse conditions. These observations were included
+in written risk reports and discussed during committee meetings.
+
+The language used to describe these risks emphasized uncertainty rather than
+immediate concern. Follow-up actions were left to business judgment, and no
+explicit escalation was triggered.
+
+\subsection{The event}
+
+A sudden downturn affecting several correlated sectors led to a rapid
+deterioration in asset quality and valuation losses. The combined impact
+exceeded prior stress-test projections and resulted in a significant reduction
+in capital buffers.
+
+Although regulatory minimums were not immediately breached, the bank faced
+heightened supervisory scrutiny, rating downgrades, and a loss of market
+confidence.
+
+\subsection{Questions}
+
+\begin{enumerate}
+    \item Based on the information provided, infer the \textbf{type of ERM
+    framework} implemented by the bank. What elements support your inference?
+
+    \item Reconstruct the bank’s \textbf{ERM architecture}. Who appears to:
+    \begin{itemize}
+        \item[$\bullet$] take risk,
+        \item[$\bullet$] monitor and challenge risk,
+        \item[$\bullet$] decide on escalation?
+    \end{itemize}
+
+    \item Identify the \textbf{early warning signals} that preceded the event.
+    Why did they fail to translate into corrective action?
+
+    \item Explain how incentives, governance dynamics, or risk culture may have
+    weakened the effectiveness of the ERM system.
+
+    \item Propose two concrete changes that would strengthen the bank’s ERM
+    architecture and prevent similar failures.
+\end{enumerate}
+
+\section{Case study 4: hedging effectiveness under ERM (prospective vs retrospective)}
+
+\subsection{Context}
+
+A global industrial firm consumes a key commodity input. To stabilize margins,
+the firm hedges its input cost exposure using standardized exchange-traded
+futures linked to a benchmark commodity index.
+
+Let $X$ denote the firm’s unhedged monthly profit-and-loss (P\&L) exposure
+(driven mainly by commodity price changes). Let $H$ denote the monthly P\&L of
+the hedging instrument (futures). The firm sets a hedge ratio $h$ and defines
+the hedged P\&L as:
+\[
+Y = X - hH
+\]
+
+The goal is to reduce risk (variance and tail losses) \emph{without creating
+unacceptable liquidity stress from margin calls}.
+
+\subsection{Data provided}
+
+Risk management estimates hedging parameters using a 24-month historical window
+(\emph{normal period}). A market disruption then occurs (\emph{stress period}),
+during which correlations and liquidity conditions change.
+
+All statistics below are monthly, expressed in \textbf{€ million}.
+
+\medskip
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+ & Normal period (estimation) & Stress period (realized) \\
+\hline
+$\mathbb{E}[X]$ & 0.0 & -2.0 \\
+$\mathbb{E}[H]$ & 0.0 & 0.0 \\
+$\mathrm{Var}(X)$ & 100 & 225 \\
+$\mathrm{Var}(H)$ & 64 & 144 \\
+$\mathrm{Cov}(X,H)$ & 48 & 12 \\
+\hline
+\end{tabular}
+\end{center}
+
+\medskip
+
+In the stress period, the firm also faces exchange margining:
+\begin{itemize}
+  \item[$\bullet$] Initial margin posted at inception: 10€m (funded from cash).
+  \item[$\bullet$] Average monthly \emph{variation margin outflow} on the hedge:
+  18€m.
+\end{itemize}
+
+Assume the firm has a liquidity buffer of 25€m dedicated to hedging operations.
+If monthly margin outflows exceed this buffer, the firm must raise cash via
+asset sales or emergency credit.
+
+\subsection{Hedging rules used by the firm}
+
+\begin{itemize}
+  \item[$\bullet$] The hedge ratio is set using the minimum-variance benchmark:
+  \[
+  h^* = \frac{\mathrm{Cov}(X,H)}{\mathrm{Var}(H)}
+  \]
+  computed from the normal-period estimates.
+
+  \item[$\bullet$] Hedging effectiveness is assessed via variance reduction:
+  \[
+  \text{HE} = 1 - \frac{\mathrm{Var}(Y)}{\mathrm{Var}(X)}
+  \]
+
+  \item[$\bullet$] Risk management reports prospective (ex ante) effectiveness
+  using normal-period parameters, then evaluates retrospective (ex post)
+  effectiveness using realized stress-period parameters \emph{while keeping the
+  same hedge ratio $h$}.
+\end{itemize}
+
+\subsection{Tasks}
+
+\begin{enumerate}
+  \item \textbf{Hedge ratio.} Compute the minimum-variance hedge ratio $h^*$
+  using the normal-period statistics.
+
+  \item \textbf{Prospective effectiveness (ex ante).}
+  Using $h=h^*$ and the normal-period statistics, compute:
+  \[
+  \mathrm{Var}(Y) = \mathrm{Var}(X) + h^2\mathrm{Var}(H) - 2h\,\mathrm{Cov}(X,H)
+  \]
+  and then compute $\text{HE}_{\text{pros}}$.
+
+  \item \textbf{Retrospective effectiveness (ex post).}
+  Using the \emph{same} hedge ratio $h=h^*$ but stress-period statistics,
+  compute $\mathrm{Var}(Y)$ and $\text{HE}_{\text{retro}}$.
+
+  \item \textbf{Interpretation.}
+  Explain why $\text{HE}_{\text{retro}}$ differs from $\text{HE}_{\text{pros}}$
+  in terms of correlation, basis risk, and regime change.
+
+  \item \textbf{Liquidity assessment.}
+  Compare the average monthly variation margin outflow (18€m) to the hedging
+  liquidity buffer (25€m). Is the buffer sufficient on average?
+
+  \item \textbf{ERM stress question.}
+  Suppose variation margin outflows can spike to 40€m in bad months.
+  Under ERM, list two governance or design changes that could reduce the
+  probability of forced asset sales.
+
+  \item \textbf{ERM integration.}
+  Identify at least three risk categories that interacted in this episode and
+  explain how ERM should have governed the interactions (not the silos).
+\end{enumerate}
+
+
+\section{Case study 5: when hedging increased risk}
+
+\subsection{Context}
+
+A large industrial firm operates globally and is highly exposed to commodity
+price fluctuations. Its core activity relies on a key input whose market price
+is volatile and subject to geopolitical and macroeconomic shocks.
+
+To stabilize earnings and protect margins, management has historically relied
+on derivative contracts to hedge price risk. The firm is considered
+sophisticated and has a dedicated risk management function.
+
+Over recent years, profitability has been stable and volatility of reported
+earnings has declined.
+
+\subsection{Risk governance and hedging strategy}
+
+The firm’s risk management policy allows the use of derivative instruments
+to hedge commodity price exposure over a rolling horizon.
+
+\begin{itemize}
+  \item[$\bullet$] Hedging is conducted primarily using futures and swap
+  contracts linked to benchmark commodity prices.
+
+  \item[$\bullet$] Hedge ratios are determined based on historical correlations
+  between input costs and output prices.
+
+  \item[$\bullet$] Hedging effectiveness is assessed ex ante using variance
+  reduction metrics and reviewed periodically.
+\end{itemize}
+
+Risk reports show that the hedging program significantly reduces short-term
+price volatility under normal market conditions.
+
+\subsection{Quantitative information}
+
+Let $X$ denote the unhedged price exposure of the firm and $H$ the payoff of
+the hedging instrument.
+
+The hedged position is defined as:
+\[
+Y = X - hH
+\]
+
+Based on historical data, the estimated minimum-variance hedge ratio is:
+\[
+h^* = \frac{\mathrm{Cov}(X,H)}{\mathrm{Var}(H)} = 0.9
+\]
+
+Prospective hedging effectiveness is estimated as:
+\[
+\text{HE}_{\text{pros}} = 1 - \frac{\mathrm{Var}(Y)}{\mathrm{Var}(X)} = 75\%
+\]
+
+As a result, management authorizes a large-scale hedging program aligned with
+this ratio.
+
+\subsection{The shock}
+
+Following a sudden market disruption:
+\begin{itemize}
+  \item[$\bullet$] Correlations between the firm’s input prices and benchmark
+  contracts weaken significantly.
+  \item[$\bullet$] Futures markets experience sharp volatility and liquidity
+  deteriorates.
+  \item[$\bullet$] Margin requirements on derivative positions increase rapidly.
+\end{itemize}
+
+Although the underlying commodity price moves in the expected direction,
+the firm faces substantial cash outflows due to margin calls.
+
+\subsection{Outcomes}
+
+Despite being economically hedged in the long term, the firm experiences:
+\begin{itemize}
+  \item[$\bullet$] severe short-term liquidity stress,
+  \item[$\bullet$] forced asset sales to meet margin calls,
+  \item[$\bullet$] a deterioration of credit metrics and investor confidence.
+\end{itemize}
+
+Retrospective hedging effectiveness falls sharply:
+\[
+\text{HE}_{\text{retro}} < 0
+\]
+
+Senior management questions how a risk-reducing strategy could generate such
+outcomes.
+
+\subsection{Questions}
+
+\begin{enumerate}
+  \item Identify the main risks faced by the firm. Which risk categories
+  interacted in this episode?
+
+  \item From an ERM perspective, explain why the hedging strategy appeared
+  effective ex ante.
+
+  \item Interpret the hedge ratio $h^*$. What assumptions underlie its use?
+
+  \item Why did prospective hedging effectiveness fail to predict actual
+  outcomes?
+
+  \item Using the ERM framework, identify which secondary risks were
+  insufficiently considered.
+
+  \item How should ERM have governed the use of derivatives differently?
+
+  \item Propose two changes to the firm’s ERM architecture or decision process
+  that would have reduced the severity of the crisis.
+\end{enumerate}
+
+
 
 \end{document}
