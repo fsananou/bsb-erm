@@ -1,0 +1,241 @@
+% !TEX TS-program = xelatex
+% Compile with XeLaTeX or LuaLaTeX (because of fontspec)
+
+\documentclass[10pt,oneside]{article}
+
+% ------------------------------------------------
+% Layout
+% ------------------------------------------------
+\usepackage[a4paper,margin=1in]{geometry}
+
+% ------------------------------------------------
+% Fonts (XeLaTeX/LuaLaTeX)
+% ------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{Carlito}
+
+% ------------------------------------------------
+% Typography & spacing
+% ------------------------------------------------
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+% ------------------------------------------------
+% Math
+% ------------------------------------------------
+\usepackage{amsmath,amssymb,mathtools}
+
+% ------------------------------------------------
+% Tables & lists
+% ------------------------------------------------
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+% ------------------------------------------------
+% Hyperlinks
+% ------------------------------------------------
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+
+% ------------------------------------------------
+% Title
+% ------------------------------------------------
+\title{\textbf{Risk Measurement Exercises: Value-at-Risk (VaR) and Expected Shortfall (ES)}}
+\author{}
+\date{}
+
+% ------------------------------------------------
+% Convenience macros (optional)
+% ------------------------------------------------
+\newcommand{\VaR}{\mathrm{VaR}}
+\newcommand{\ES}{\mathrm{ES}}
+\newcommand{\Loss}{L}
+\newcommand{\R}{R}
+\newcommand{\Normal}{\mathcal{N}}
+
+
+\title{\textbf{Final Exam}}
+\author{Course: Enterprise Risk Management}
+\date{}
+
+\begin{document}
+\maketitle
+% ===================== ERM FINAL EXAM (LaTeX) =====================
+% Paste into an article document (or adapt to your template).
+% Designed to be challenging but fair, with computation exercises.
+% ==================================================================
+
+\subsection*{Instructions}
+\begin{itemize}
+  \item[$\bullet$] Duration: \textbf{3 hours}. All questions must be answered.
+  \item[$\bullet$] Calculators are allowed. Show your steps for computations.
+  \item[$\bullet$] Clarity of reasoning matters more than length.
+  \item[$\bullet$] Unless explicitly asked, keep answers concise but rigorous.
+\end{itemize}
+
+\subsection*{Structure and grading}
+\begin{itemize}
+  \item[$\bullet$] Section I --- Risk concepts \& ERM foundations: \textbf{20 points}
+  \item[$\bullet$] Section II --- Frameworks, architecture \& governance: \textbf{25 points}
+  \item[$\bullet$] Section III --- Measurement, hedging \& decision-making (with computations): \textbf{30 points}
+  \item[$\bullet$] Section IV --- Industry cases \& ERM failures: \textbf{25 points}
+\end{itemize}
+
+\vspace{2mm}
+\hrule
+\vspace{2mm}
+
+% ===================== SECTION I =====================
+\section*{Section I --- Risk concepts \& ERM foundations (20 points)}
+
+\subsection*{Question 1 (10 points): risk vs uncertainty}
+Explain the difference between \emph{risk} and \emph{uncertainty} in the context of ERM.
+Why is this distinction central to the design of enterprise risk management systems?
+Your answer must address (i) what can and cannot be reliably measured, (ii) the role of scenarios
+versus point forecasts, and (iii) why judgment remains necessary even with quantitative tools.
+
+\subsection*{Question 2 (10 points): why silo risk management fails}
+Explain why managing risks in silos can increase enterprise-wide vulnerability, even if each risk
+category appears well controlled locally. Provide a concrete example involving at least two risk
+categories (e.g.\ market and liquidity; operational and reputational; credit and funding).
+
+% ===================== SECTION II =====================
+\section*{Section II --- ERM frameworks, architecture \& governance (25 points)}
+
+\subsection*{Question 3 (10 points): frameworks are not ERM}
+COSO ERM and ISO 31000 are widely used frameworks. Explain what these frameworks provide, but also
+what they do not provide. Your answer must include:
+\begin{itemize}
+  \item[$\bullet$] what frameworks do well (structure, language, process discipline),
+  \item[$\bullet$] how ``box-ticking ERM'' emerges,
+  \item[$\bullet$] why governance and incentives dominate formal adoption.
+\end{itemize}
+
+\subsection*{Question 4 (15 points): architecture that makes risk information decision-relevant}
+Consider the statement:
+\begin{quote}
+``ERM fails when risk information exists but does not change decisions.''
+\end{quote}
+Using concepts from the course, propose an ERM architecture that increases the probability that risk
+signals will affect decisions. Your answer must discuss:
+\begin{itemize}
+  \item[$\bullet$] risk ownership vs.\ risk oversight,
+  \item[$\bullet$] escalation thresholds and exception governance,
+  \item[$\bullet$] the role of the board and senior management,
+  \item[$\bullet$] why independence of the risk function is necessary but not sufficient.
+\end{itemize}
+
+% ===================== SECTION III =====================
+\section*{Section III --- Measurement, hedging \& decision-making (30 points)}
+
+\subsection*{Question 5 (10 points): RAROC and EVA (concept + computation)}
+
+A business unit proposes a new portfolio with the following annual figures (in \texteuro{} million).
+Expected net income (after expected losses) is $NI = 28$.
+Economic capital allocated to absorb unexpected losses at the chosen confidence level is $EC = 200$.
+The firm-wide hurdle rate (cost of capital) is $k = 11\%$.
+Assume invested capital for EVA purposes is equal to economic capital for this exercise.
+
+\begin{enumerate}
+  \item[(a)] Define \textbf{RAROC} conceptually and compute it for this portfolio. \hfill (3 pts)
+  \item[(b)] Define \textbf{EVA} conceptually and compute it. \hfill (3 pts)
+  \item[(c)] A manager concludes: ``RAROC $>$ hurdle rate $\Rightarrow$ always accept.''
+  Explain why this rule can be misleading in ERM practice (give \emph{two} reasons). \hfill (4 pts)
+\end{enumerate}
+
+\subsection*{Question 6 (20 points): hedging assessment (prospective vs retrospective) + tail risk}
+
+A firm hedges a monthly exposure using a derivative. Let $X$ denote the unhedged monthly P\&L
+exposure (in \texteuro{} million), and $H$ the monthly P\&L of the hedging instrument.
+The hedged position is:
+\[
+Y = X - hH
+\]
+The firm sets the hedge ratio using normal-period estimates, then keeps that $h$ during stress.
+
+\paragraph{Data (monthly, \texteuro{} million)}
+Normal period (estimation):
+\[
+\mathrm{Var}(X)=100,\quad \mathrm{Var}(H)=64,\quad \mathrm{Cov}(X,H)=48
+\]
+Stress period (realized):
+\[
+\mathrm{Var}(X)=225,\quad \mathrm{Var}(H)=144,\quad \mathrm{Cov}(X,H)=12
+\]
+
+Hedge effectiveness is measured by variance reduction:
+\[
+\text{HE} = 1-\frac{\mathrm{Var}(Y)}{\mathrm{Var}(X)}
+\]
+with
+\[
+\mathrm{Var}(Y)=\mathrm{Var}(X)+h^2\mathrm{Var}(H)-2h\,\mathrm{Cov}(X,H)
+\]
+
+\begin{enumerate}
+  \item[(a)] Compute the minimum-variance hedge ratio in normal times:
+  \[
+  h^*=\frac{\mathrm{Cov}(X,H)}{\mathrm{Var}(H)}
+  \]
+  \hfill (4 pts)
+
+  \item[(b)] Using $h=h^*$, compute $\mathrm{Var}(Y)$ and $\text{HE}_{\text{pros}}$ in the normal period. \hfill (5 pts)
+
+  \item[(c)] Keeping $h=h^*$, compute $\mathrm{Var}(Y)$ and $\text{HE}_{\text{retro}}$ using stress-period statistics. \hfill (5 pts)
+
+  \item[(d)] Interpret the change from $\text{HE}_{\text{pros}}$ to $\text{HE}_{\text{retro}}$.
+  Your explanation must mention \emph{regime change} and at least one of:
+  basis/correlation breakdown, model risk, liquidity/market functioning. \hfill (3 pts)
+
+  \item[(e)] Tail-risk check (discrete ES). In stress months, the unhedged loss distribution of $X$
+  (in \texteuro{} million) is approximated by the following \emph{loss outcomes} (positive numbers are losses):
+  \[
+  L_X \in \{0,\,5,\,10,\,25,\,40\} \quad \text{with probabilities} \quad \{0.40,\,0.25,\,0.20,\,0.10,\,0.05\}
+  \]
+  (i) Compute $VaR_{95\%}(L_X)$. \hfill (1 pt)\\
+  (ii) Compute $ES_{95\%}(L_X)$ (expected loss conditional on being in the worst 5\%). \hfill (2 pts)
+\end{enumerate}
+
+\paragraph{Short ERM question (no computation, included in Q6 marking)}
+Explain why a derivative hedge that improves variance and even improves tail risk may still be
+unacceptable from an ERM perspective. Your answer must identify at least \emph{two} ``secondary risks''
+introduced by hedging instruments (e.g.\ liquidity/margining, counterparty, legal, basis). \hfill (Bonus within Q6, up to 2 pts)
+
+% ===================== SECTION IV =====================
+\section*{Section IV --- Industry cases \& ERM failures (25 points)}
+
+\subsection*{Question 7 (12 points): cross-industry comparison}
+Compare ERM in \emph{two} industries studied in the course (choose two):
+financial institutions, energy \& commodities, non-financial corporations, public sector \& infrastructure.
+Your answer must explain:
+\begin{itemize}
+  \item[$\bullet$] how industry economics shape ERM priorities,
+  \item[$\bullet$] typical instruments and constraints (e.g.\ models/capital, hedging/liquidity buffers, controls/culture),
+  \item[$\bullet$] why ERM tends to fail differently across these industries.
+\end{itemize}
+
+\subsection*{Question 8 (13 points): case-based diagnosis --- ``ERM existed, crisis still happened''}
+A large firm has adopted a recognized ERM framework, produces regular risk reports, and uses quantitative
+risk metrics. Despite this, it experiences a major crisis triggered by a combination of market stress,
+liquidity pressure, and delayed escalation.
+
+\medskip
+
+Explain why ERM may have failed and identify the most likely failure modes. Your answer must:
+\begin{itemize}
+  \item[$\bullet$] distinguish measurement failure from governance failure,
+  \item[$\bullet$] discuss incentives and escalation,
+  \item[$\bullet$] explain why ``more data'' would not necessarily have prevented the crisis,
+  \item[$\bullet$] propose \emph{two} concrete architecture or process changes that would reduce recurrence.
+\end{itemize}
+
+\vspace{2mm}
+\hrule
+\vspace{2mm}
+
+\subsection*{End of exam}
+
+
+\end{document}
