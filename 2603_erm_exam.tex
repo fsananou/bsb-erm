@@ -1,60 +1,14 @@
-% !TEX TS-program = xelatex
-% Compile with XeLaTeX or LuaLaTeX (because of fontspec)
-
-\documentclass[10pt,oneside]{article}
-
-% ------------------------------------------------
-% Layout
-% ------------------------------------------------
-\usepackage[a4paper,margin=1in]{geometry}
-
-% ------------------------------------------------
-% Fonts (XeLaTeX/LuaLaTeX)
-% ------------------------------------------------
-\usepackage{fontspec}
-\setmainfont{Carlito}
-
-% ------------------------------------------------
-% Typography & spacing
-% ------------------------------------------------
-\usepackage{microtype}
-\usepackage{setspace}
-\onehalfspacing
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.6em}
-
-% ------------------------------------------------
-% Math
-% ------------------------------------------------
-\usepackage{amsmath,amssymb,mathtools}
-
-% ------------------------------------------------
-% Tables & lists
-% ------------------------------------------------
-\usepackage{booktabs}
-\usepackage{enumitem}
-
-% ------------------------------------------------
-% Hyperlinks
-% ------------------------------------------------
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
-
-% ------------------------------------------------
-% Title
-% ------------------------------------------------
-\title{\textbf{Risk Measurement Exercises: Value-at-Risk (VaR) and Expected Shortfall (ES)}}
-\author{}
-\date{}
-
-% ------------------------------------------------
-% Convenience macros (optional)
-% ------------------------------------------------
-\newcommand{\VaR}{\mathrm{VaR}}
-\newcommand{\ES}{\mathrm{ES}}
-\newcommand{\Loss}{L}
-\newcommand{\R}{R}
-\newcommand{\Normal}{\mathcal{N}}
-
+%!TEX program = lualatex 
+\documentclass[11pt]{article} 
+\usepackage{hyperref} 
+\usepackage{hyphenat} % allow hyphenation again 
+\usepackage{fontspec} 
+\setmainfont{Carlito} 
+\usepackage[scaled=.5]{helvet} 
+\usepackage{courier} 
+\usepackage{amsmath} 
+\usepackage{setspace} 
+\setstretch{0.97} 
 
 \title{\textbf{Final Exam}}
 \author{Course: Enterprise Risk Management}
@@ -230,12 +184,5 @@ Explain why ERM may have failed and identify the most likely failure modes. Your
   \item[$\bullet$] explain why ``more data'' would not necessarily have prevented the crisis,
   \item[$\bullet$] propose \emph{two} concrete architecture or process changes that would reduce recurrence.
 \end{itemize}
-
-\vspace{2mm}
-\hrule
-\vspace{2mm}
-
-\subsection*{End of exam}
-
 
 \end{document}

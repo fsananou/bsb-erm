@@ -1,47 +1,15 @@
-% !TEX TS-program = xelatex
-% Compile with XeLaTeX or LuaLaTeX (because of fontspec)
+%!TEX program = lualatex 
+\documentclass[11pt]{article} 
+\usepackage{hyperref} 
+\usepackage{hyphenat} % allow hyphenation again 
+\usepackage{fontspec} 
+\setmainfont{Carlito} 
+\usepackage[scaled=.5]{helvet} 
+\usepackage{courier} 
+\usepackage{amsmath} 
+\usepackage{setspace} 
+\setstretch{0.97} 
 
-\documentclass[10pt,oneside]{article}
-
-% ------------------------------------------------
-% Layout
-% ------------------------------------------------
-\usepackage[a4paper,margin=1in]{geometry}
-
-% ------------------------------------------------
-% Fonts (XeLaTeX/LuaLaTeX)
-% ------------------------------------------------
-\usepackage{fontspec}
-\setmainfont{Carlito}
-
-% ------------------------------------------------
-% Typography & spacing
-% ------------------------------------------------
-\usepackage{microtype}
-\usepackage{setspace}
-\onehalfspacing
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0.6em}
-
-% ------------------------------------------------
-% Math
-% ------------------------------------------------
-\usepackage{amsmath,amssymb,mathtools}
-
-% ------------------------------------------------
-% Tables & lists
-% ------------------------------------------------
-\usepackage{booktabs}
-\usepackage{enumitem}
-
-% ------------------------------------------------
-% Hyperlinks
-% ------------------------------------------------
-\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
-
-% ------------------------------------------------
-% Title
-% ------------------------------------------------
 \title{\textbf{Risk Measurement Exercises: Value-at-Risk (VaR) and Expected Shortfall (ES)}}
 \author{}
 \date{}
@@ -66,9 +34,9 @@
 \onehalfspacing
 
 
-\section{Case Study 1: Market Risk, Value-at-Risk and Risk Appetite}
+\section{Market risk, Value-at-Risk and Risk Appetite}
 
-\subsection{Context}
+\subsection*{Context}
 
 A mid-sized bank operates a trading desk managing a diversified market-risk
 portfolio with a total market value of \textbf{€100 million}. The bank has
@@ -78,7 +46,7 @@ Value-at-Risk (VaR) as the primary risk metric.
 The desk is considered compliant as long as its estimated VaR remains below
 the approved limit.
 
-\subsection{Portfolio Composition}
+\subsection*{Portfolio Composition}
 
 The portfolio consists of the following exposures:
 \begin{itemize}
@@ -87,7 +55,7 @@ The portfolio consists of the following exposures:
     managed through duration exposure.
 \end{itemize}
 
-\subsection{Risk Parameters}
+\subsection*{Risk Parameters}
 
 The following risk parameters are provided:
 \begin{itemize}
@@ -100,14 +68,14 @@ The following risk parameters are provided:
 
 Assume normally distributed risk factors and a one-day holding period.
 
-\subsection{ERM Constraint}
+\subsection*{ERM Constraint}
 
 The bank has set the following limit:
 \begin{itemize}
     \item 1-day 99\% Value-at-Risk limit: \textbf{€3.0 million}.
 \end{itemize}
 
-\subsection{Questions}
+\subsection*{Questions}
 
 \begin{enumerate}
     \item Compute the 1-day 99\% Value-at-Risk of the portfolio using a
@@ -124,17 +92,18 @@ The bank has set the following limit:
     \item Identify at least two weaknesses of relying exclusively on VaR from
     an ERM perspective.
 \end{enumerate}
+\pagebreak
 
-\section{Case Study 2: Expected Shortfall, Governance and Escalation}
+\section{Expected shortfall, governance and escalation}
 
-\subsection{Context}
+\subsection*{Context}
 
 Following internal reviews, the bank complements VaR with Expected Shortfall
 (ES) reporting to better capture tail risk. ES is monitored daily and compared
 against a predefined limit. Breaches are supposed to trigger immediate
 escalation to senior management.
 
-\subsection{Observed Portfolio Performance}
+\subsection*{Observed Portfolio Performance}
 
 The daily profit-and-loss (P\&L) of the portfolio over the last 12 trading days
 (in millions of euros) is reported below:
@@ -160,7 +129,7 @@ Day & P\&L (€m) \\
 \end{tabular}
 \end{center}
 
-\subsection{ERM Rules}
+\subsection*{ERM Rules}
 
 The ERM framework specifies:
 \begin{itemize}
@@ -168,7 +137,7 @@ The ERM framework specifies:
     \item Mandatory escalation in case of a breach.
 \end{itemize}
 
-\subsection{Questions}
+\subsection*{Questions}
 
 \begin{enumerate}
     \item Sort the P\&L distribution from worst to best.
@@ -185,11 +154,12 @@ The ERM framework specifies:
     guarantee effective ERM.
 \end{enumerate}
 
+\pagebreak
 
 
-\section{Case study 3 : signals without escalation}
+\section{Signals without escalation}
 
-\subsection{Context}
+\subsection*{Context}
 
 A mid-sized European bank operates across corporate lending, structured finance,
 and capital markets activities. The institution is considered well managed and
@@ -199,7 +169,7 @@ The bank is subject to prudential supervision and regularly undergoes internal
 and external reviews of its risk management practices. No material weaknesses
 have been identified in recent assessments.
 
-\subsection{Risk governance practices}
+\subsection*{Risk governance practices}
 
 Risk management within the bank is organized around a centralized risk function
 that operates independently from business units. Risk policies define limits
@@ -216,7 +186,7 @@ Senior management receives periodic risk reports summarizing:
 A committee involving senior executives meets regularly to review these reports
 and discuss emerging risks.
 
-\subsection{Strategic development}
+\subsection*{Strategic development}
 
 Over a two-year period, the bank expanded rapidly in structured finance and
 specialized lending activities. Individual transactions complied with existing
@@ -233,7 +203,7 @@ However, several features characterized this expansion:
 While no formal breaches were recorded, internal risk assessments increasingly
 highlighted rising portfolio sensitivity to adverse scenarios.
 
-\subsection{Risk signals}
+\subsection*{Risk signals}
 
 Risk analysts noted that portfolio-level exposures were approaching internally
 defined thresholds under adverse conditions. These observations were included
@@ -243,7 +213,7 @@ The language used to describe these risks emphasized uncertainty rather than
 immediate concern. Follow-up actions were left to business judgment, and no
 explicit escalation was triggered.
 
-\subsection{The event}
+\subsection*{The event}
 
 A sudden downturn affecting several correlated sectors led to a rapid
 deterioration in asset quality and valuation losses. The combined impact
@@ -254,7 +224,7 @@ Although regulatory minimums were not immediately breached, the bank faced
 heightened supervisory scrutiny, rating downgrades, and a loss of market
 confidence.
 
-\subsection{Questions}
+\subsection*{Questions}
 
 \begin{enumerate}
     \item Based on the information provided, infer the \textbf{type of ERM
@@ -277,9 +247,11 @@ confidence.
     architecture and prevent similar failures.
 \end{enumerate}
 
-\section{Case study 4: hedging effectiveness under ERM (prospective vs retrospective)}
+\pagebreak
 
-\subsection{Context}
+\section{Hedging effectiveness under ERM (prospective vs retrospective)}
+
+\subsection*{Context}
 
 A global industrial firm consumes a key commodity input. To stabilize margins,
 the firm hedges its input cost exposure using standardized exchange-traded
@@ -296,7 +268,7 @@ Y = X - hH
 The goal is to reduce risk (variance and tail losses) \emph{without creating
 unacceptable liquidity stress from margin calls}.
 
-\subsection{Data provided}
+\subsection*{Data provided}
 
 Risk management estimates hedging parameters using a 24-month historical window
 (\emph{normal period}). A market disruption then occurs (\emph{stress period}),
@@ -333,7 +305,7 @@ Assume the firm has a liquidity buffer of 25€m dedicated to hedging operations
 If monthly margin outflows exceed this buffer, the firm must raise cash via
 asset sales or emergency credit.
 
-\subsection{Hedging rules used by the firm}
+\subsection*{Hedging rules used by the firm}
 
 \begin{itemize}
   \item[$\bullet$] The hedge ratio is set using the minimum-variance benchmark:
@@ -353,7 +325,7 @@ asset sales or emergency credit.
   same hedge ratio $h$}.
 \end{itemize}
 
-\subsection{Tasks}
+\subsection*{Tasks}
 
 \begin{enumerate}
   \item \textbf{Hedge ratio.} Compute the minimum-variance hedge ratio $h^*$
@@ -388,10 +360,12 @@ asset sales or emergency credit.
   explain how ERM should have governed the interactions (not the silos).
 \end{enumerate}
 
+\pagebreak
 
-\section{Case study 5: when hedging increased risk}
 
-\subsection{Context}
+\section{When hedging increased risk}
+
+\subsection*{Context}
 
 A large industrial firm operates globally and is highly exposed to commodity
 price fluctuations. Its core activity relies on a key input whose market price
@@ -404,7 +378,7 @@ sophisticated and has a dedicated risk management function.
 Over recent years, profitability has been stable and volatility of reported
 earnings has declined.
 
-\subsection{Risk governance and hedging strategy}
+\subsection*{Risk governance and hedging strategy}
 
 The firm’s risk management policy allows the use of derivative instruments
 to hedge commodity price exposure over a rolling horizon.
@@ -423,7 +397,7 @@ to hedge commodity price exposure over a rolling horizon.
 Risk reports show that the hedging program significantly reduces short-term
 price volatility under normal market conditions.
 
-\subsection{Quantitative information}
+\subsection*{Quantitative information}
 
 Let $X$ denote the unhedged price exposure of the firm and $H$ the payoff of
 the hedging instrument.
@@ -446,7 +420,7 @@ Prospective hedging effectiveness is estimated as:
 As a result, management authorizes a large-scale hedging program aligned with
 this ratio.
 
-\subsection{The shock}
+\subsection*{The shock}
 
 Following a sudden market disruption:
 \begin{itemize}
@@ -460,7 +434,7 @@ Following a sudden market disruption:
 Although the underlying commodity price moves in the expected direction,
 the firm faces substantial cash outflows due to margin calls.
 
-\subsection{Outcomes}
+\subsection*{Outcomes}
 
 Despite being economically hedged in the long term, the firm experiences:
 \begin{itemize}
@@ -477,7 +451,7 @@ Retrospective hedging effectiveness falls sharply:
 Senior management questions how a risk-reducing strategy could generate such
 outcomes.
 
-\subsection{Questions}
+\subsection*{Questions}
 
 \begin{enumerate}
   \item Identify the main risks faced by the firm. Which risk categories
@@ -500,7 +474,9 @@ outcomes.
   that would have reduced the severity of the crisis.
 \end{enumerate}
 
-\section{Case study: enterprise risk management at Shell}
+\pagebreak
+
+\section{Enterprise risk management at Shell}
 
 Shell plc is a global energy company with operations covering upstream
 exploration and production, integrated gas, chemicals, trading, power
@@ -598,12 +574,12 @@ down. The case therefore illustrates both how ERM is implemented in practice
 by a large multinational firm and why even sophisticated ERM cannot eliminate
 the possibility of failure.
 
-\subsection{Discussion questions}
+\subsection*{Discussion questions}
 
 Answer the following questions using evidence from the case above. Answers
 should focus on reasoning and diagnosis rather than description.
 
-\subsubsection{ERM framework and philosophy}
+\subsubsection*{ERM framework and philosophy}
 
 \begin{enumerate}
   \item How would you characterize Shell’s ERM framework?
@@ -619,7 +595,7 @@ should focus on reasoning and diagnosis rather than description.
   quantitative risk measurement?
 \end{enumerate}
 
-\subsubsection{ERM architecture and governance}
+\subsubsection*{ERM architecture and governance}
 
 \begin{enumerate}
   \setcounter{enumi}{3}
@@ -634,7 +610,7 @@ should focus on reasoning and diagnosis rather than description.
   coordination and escalation of risks?
 \end{enumerate}
 
-\subsubsection{Risk integration and instruments}
+\subsubsection*{Risk integration and instruments}
 
 \begin{enumerate}
   \setcounter{enumi}{6}
@@ -648,7 +624,7 @@ should focus on reasoning and diagnosis rather than description.
   derivative hedging? What type of failure is this designed to prevent?
 \end{enumerate}
 
-\subsubsection{Strategy, limits, and failure modes}
+\subsubsection*{Strategy, limits, and failure modes}
 
 \begin{enumerate}
   \setcounter{enumi}{9}
@@ -666,7 +642,10 @@ should focus on reasoning and diagnosis rather than description.
   does not eliminate the possibility of failure.
 \end{enumerate}
 
-\section{Group exercise: designing ERM for a complex firm}
+\pagebreak
+
+
+\section*{Group exercise: designing ERM for a complex firm}
 
 This exercise asks you to design an enterprise risk management (ERM) system
 for a firm operating in a highly uncertain and capital-intensive environment.
@@ -674,7 +653,7 @@ You are not asked to replicate an existing framework, but to propose a coherent
 ERM design that could realistically function within the organization described
 below.
 
-\subsection{Firm description}
+\subsection*{Firm description}
 
 Consider a large multinational firm operating in a capital-intensive industry
 with global operations. The firm is exposed to volatile input prices, complex
@@ -695,7 +674,7 @@ threaten its survival, but they revealed weaknesses in coordination, escalation,
 and anticipation of adverse scenarios. Senior management has therefore decided
 to strengthen enterprise-wide risk management.
 
-\subsection{Constraints and objectives}
+\subsection*{Constraints and objectives}
 
 Senior management has defined the following high-level objectives for ERM:
 
@@ -710,7 +689,7 @@ that incentives, power structures, and time constraints may limit how far
 formal processes can go. Your design should therefore be realistic and
 implementable.
 
-\subsection{Tasks}
+\subsection*{Tasks}
 
 Your group is asked to propose an ERM design covering the following dimensions.
 You should justify each design choice by explicitly linking it to the firm’s
@@ -769,7 +748,7 @@ Explain which assumptions would break down and which parts of the system would
 be most vulnerable. What early warning signals would you expect to see before
 failure becomes unavoidable?
 
-\subsection{Expected output}
+\subsection*{Expected output}
 
 Your group should produce a short written proposal (2--3 pages) summarizing
 your ERM design and the reasoning behind it. There is no single correct answer;
