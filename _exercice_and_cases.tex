@@ -1,0 +1,259 @@
+%!TEX program = lualatex
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage{hyphenat}
+\usepackage{fontspec}
+\setmainfont{Carlito}
+\usepackage[scaled=.5]{helvet}
+\usepackage{courier}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{fancyvrb}
+\setstretch{0.97}
+\geometry{margin=1in}
+
+\title{\textbf{Enterprise Risk Management --- Exercises \& Case Studies}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+A mid-sized bank operates a trading desk managing a diversified market-risk portfolio with a total market value of \textbf{€100 million}. The bank has implemented an ERM framework centered on quantitative risk limits, with Value-at-Risk (VaR) as the primary risk metric.
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{How to use this student workbook}
+This student workbook contains a merged, pedagogical set of exercises on risk measurement (VaR and ES) and applied ERM case studies. Each exercise begins with a short contextual introduction that explains the learning objective. Where appropriate, you will be asked to work with a realistic, larger dataset; instructions for generating and analysing the data in \textbf{Excel} are provided. No solutions are included in this file.
+
+\newpage
+\part*{Part I --- Risk Measurement Foundations}
+
+\section{Lecture 1: Intuition about VaR and ES}
+\subsection*{Learning objective}
+Understand what VaR and Expected Shortfall (ES) measure, their limitations, and how sample size and tail behavior affect them.
+
+\subsection*{Exercise 1.1 --- Conceptual VaR}
+A trading desk reports a \textbf{1-day VaR at 99\% confidence} of \textbf{€10 million}.
+
+\begin{enumerate}
+  \item In plain language, explain what this number means.
+  \item Over 100 trading days, how many days would you expect losses to exceed €10 million?
+  \item Does VaR tell you how large losses can be beyond €10 million? Explain.
+  \item Give two short examples of situations where VaR can be misleading.
+\end{enumerate}
+
+\bigskip
+\subsection*{Exercise 1.2 --- Historical VaR with a realistic sample (Excel)}
+\textbf{Context:} Small samples (10 observations) are useful for demonstrating mechanics but not for building intuition about model stability. In this exercise you will create a realistic 250-day return series in Excel with occasional large negative shocks and compute historical VaR and ES.
+
+\textbf{Excel data generation (no code required):}
+\begin{enumerate}
+  \item Open a new Excel workbook. In column A (A2:A251) create 250 rows labelled Day 1 to Day 250.
+  \item In column B (B2:B251) generate daily returns using Excel's random functions and a simple volatility clustering approximation:
+    \begin{itemize}
+      \item In B2 enter: \texttt{=NORM.INV(RAND(),0.0004,0.01)} to create a base normal return.
+      \item In C2 enter a volatility factor: \texttt{=1 + 0.5*ABS(NORM.INV(RAND(),0,0.8))}.
+      \item In D2 compute the adjusted return: \texttt{=B2*C2}.
+      \item Copy B2:D2 down to row 251.
+    \end{itemize}
+  \item To inject occasional negative jumps, choose five row indices (for example rows 32, 80, 122, 192, 232) and in column D for those rows subtract a jump value (e.g., -0.05, -0.08, or -0.12). Example: if D32 currently contains a value, replace it with \texttt{=D32 - 0.08}.
+  \item Save the sheet as \texttt{returns.xlsx}.
+\end{enumerate}
+
+\textbf{Excel calculations for VaR and ES:}
+\begin{enumerate}
+  \item In column E compute losses as negative returns: \texttt{= -D2} and copy down.
+  \item Sort a copy of column E in descending order (largest losses first) using Excel's \texttt{SORT} or by copying to a new sheet and using Data → Sort.
+  \item 95\% historical VaR: locate the 95th percentile of losses using \texttt{=PERCENTILE.EXC(E2:E251,0.95)}.
+  \item 99\% historical VaR: \texttt{=PERCENTILE.EXC(E2:E251,0.99)}.
+  \item 95\% ES: compute the average of losses greater than or equal to the 95\% VaR using \texttt{=AVERAGEIF(E2:E251,">=" & cell_with_VaR95)}.
+  \item 99\% ES: \texttt{=AVERAGEIF(E2:E251,">=" & cell_with_VaR99)}.
+  \item Convert to euros for a €50m portfolio: multiply the loss fractions by 50,000,000.
+\end{enumerate}
+
+\textbf{Deliverables:} a short report (1 page) with the computed VaR/ES numbers (in \euro), a histogram (Excel chart of column D), the backtest count (number of days where loss > VaR99), and a 3–4 sentence interpretation.
+
+\newpage
+\section{Lecture 2: Model risk and stress testing}
+\subsection*{Learning objective}
+Learn how model assumptions (normality, stationarity) and stress scenarios affect risk metrics and decision-making.
+
+\subsection*{Exercise 2.1 --- Parametric VaR vs Historical VaR (Excel)}
+\begin{enumerate}
+  \item Using the synthetic dataset in \texttt{returns.xlsx}, compute the sample standard deviation of returns with \texttt{=STDEV.S(D2:D251)}.
+  \item Parametric 99\% VaR (assuming normality) = \texttt{=NORM.S.INV(0.99) * stdev}, where \texttt{stdev} is the cell with the standard deviation.
+  \item Compare the parametric VaR to the historical VaR computed earlier and write a short explanation of the difference.
+  \item Stress test: compute the standard deviation of the most recent 20 days with \texttt{=STDEV.S(D232:D251)} and double it. Recompute parametric VaR using the doubled volatility and comment on the change.
+\end{enumerate}
+
+\subsection*{Exercise 2.2 --- Scenario analysis (Excel)}
+\begin{enumerate}
+  \item Construct a stress scenario for the €100m portfolio in Case 1: specify an equity shock (e.g., -8\%), an interest-rate shock (e.g., +30 bps), and a liquidity shock (e.g., margin calls equal to X\% of buffer). Use Excel to compute the P\&L impact:
+    \begin{itemize}
+      \item Equity P\&L = 60,000,000 * equity shock.
+      \item Interest-rate P\&L = sensitivity per bp * bp shock.
+      \item Liquidity impact: specify a margin outflow and compute required asset sales if buffer is exceeded.
+    \end{itemize}
+  \item Explain in a short paragraph how scenario analysis complements VaR and ES in ERM.
+\end{enumerate}
+
+\newpage
+\part*{Part II --- Applied ERM Case Studies}
+
+\section{Case 1: Market risk, VaR limits and stress}
+\subsection*{Context (excerpt)}
+A mid-sized bank operates a trading desk managing a diversified market-risk portfolio with a total market value of \textbf{€100 million}. The bank has implemented an ERM framework centered on quantitative risk limits, with Value-at-Risk (VaR) as the primary risk metric.
+
+\subsection*{Portfolio composition and parameters}
+\begin{itemize}
+  \item Equity exposure: \euro 60m; daily equity volatility: 2\%.
+  \item Interest-rate exposure: \euro 40m; daily yield volatility: 5 bps; sensitivity: +1 bp $\Rightarrow$ \euro 0.20m loss.
+  \item Correlation between equity returns and yield changes: 0.
+  \item 1-day 99\% VaR limit: \euro 3.0m.
+\end{itemize}
+
+\subsection*{Exercise 3.1}
+\begin{enumerate}
+  \item Compute the 1-day 99\% VaR of the portfolio using a variance--covariance approach (show intermediate steps in Excel).
+  \item Does the desk comply with the VaR limit? Explain.
+  \item Consider a stress scenario: equity decline 8\%, yields +30 bps. Compute the scenario loss in Excel.
+  \item Explain why such a stress loss can occur even if VaR is within limits.
+  \item Propose two complementary ERM controls (non-VaR) that would reduce the chance of surprise losses.
+\end{enumerate}
+
+\bigskip
+\section{Case 2: Expected Shortfall, governance and escalation}
+\subsection*{Context}
+The bank now monitors 1-day 99\% Expected Shortfall (ES) with a limit of \euro 4.0m and mandatory escalation on breach. The last 12 trading days' P\&L (in \euro m) are:
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+Day & P\&L (\euro m) & Day & P\&L (\euro m) \\
+\midrule
+1 & +0.6 & 7 & -3.5 \\
+2 & -1.1 & 8 & +0.5 \\
+3 & +0.4 & 9 & -1.7 \\
+4 & -2.3 & 10 & -4.2 \\
+5 & +0.9 & 11 & -0.6 \\
+6 & -0.8 & 12 & -6.8 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Exercise 3.2}
+\begin{enumerate}
+  \item Sort the P\&L distribution from worst to best (Excel: use SORT or sort the column).
+  \item Compute the empirical 1-day 99\% ES and determine whether the ES limit is breached (Excel: use \texttt{=AVERAGEIF(range,">=" & VaR99)} after computing VaR99 with \texttt{PERCENTILE.EXC}).
+  \item The large loss on Day 12 occurred without prior escalation. Identify possible failures in: risk reporting, governance architecture, and incentives/risk culture.
+  \item Explain why replacing VaR with ES alone does not guarantee effective ERM.
+  \item Propose a practical escalation rule (quantitative + qualitative) that would have forced earlier action in this scenario.
+\end{enumerate}
+
+\newpage
+\section{Case 3: Signals without escalation (governance and culture)}
+\subsection*{Context}
+A bank expands rapidly into structured finance. Risk reports show rising concentration, frequent exceptions, and stress-test sensitivity. Committee minutes use soft language and leave follow-up to business judgment. A downturn causes large losses and supervisory scrutiny.
+
+\subsection*{Exercise 3.3}
+\begin{enumerate}
+  \item Based on the description, identify the type of ERM framework (principles-based vs rules-based) and justify your answer.
+  \item Reconstruct the ERM architecture: who takes risk, who monitors, who decides escalation?
+  \item List the early warning signals and explain why they failed to trigger corrective action.
+  \item Explain how incentives and culture can undermine ERM, giving two concrete examples.
+  \item Propose two concrete governance changes that would make escalation automatic when certain signals appear.
+\end{enumerate}
+
+\newpage
+\section{Case 4: Hedging effectiveness (prospective vs retrospective)}
+\subsection*{Context}
+A firm hedges commodity exposure using futures. Normal-period estimates (24 months) and stress-period realized statistics are provided. The firm uses the minimum-variance hedge ratio and evaluates hedging effectiveness by variance reduction. Margining creates liquidity exposure.
+
+\subsection*{Data (monthly, \euro m)}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+ & Normal period & Stress period \\
+\midrule
+E[X] & 0.0 & -2.0 \\
+Var(X) & 100 & 225 \\
+Var(H) & 64 & 144 \\
+Cov(X,H) & 48 & 12 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Initial margin: \euro 10m; average monthly variation margin outflow: \euro 18m; liquidity buffer: \euro 25m.
+
+\subsection*{Exercise 3.4}
+\begin{enumerate}
+  \item Compute the minimum-variance hedge ratio $h^*$ using normal-period statistics (Excel: compute \texttt{=Cov/VarH}).
+  \item Using $h^*$, compute prospective hedged variance and hedging effectiveness (HE$_{pros}$) in Excel.
+  \item Using the same $h^*$ but stress-period statistics, compute retrospective hedged variance and HE$_{retro}$.
+  \item Explain why HE$_{retro}$ differs from HE$_{pros}$ in terms of correlation, basis risk, and regime change.
+  \item Is the liquidity buffer sufficient on average? What governance changes would reduce the probability of forced asset sales if margin spikes to \euro 40m?
+  \item Identify three risk categories that interacted in this episode and explain how ERM should govern their interaction.
+\end{enumerate}
+
+\newpage
+\section{Case 5: When hedging increased risk}
+\subsection*{Context}
+A large industrial firm hedges commodity price risk with derivatives. Ex ante the hedge reduces variance by 75\% (h* = 0.9). After a shock, correlations weaken, volatility spikes, and margin calls create liquidity stress. HE$_{retro} < 0$.
+
+\subsection*{Exercise 3.5}
+\begin{enumerate}
+  \item Identify the main risks and how they interact.
+  \item Explain why the hedge looked effective ex ante.
+  \item Interpret the hedge ratio $h^*$ and its assumptions.
+  \item Explain why prospective effectiveness failed to predict outcomes.
+  \item Which secondary risks were insufficiently considered?
+  \item Propose two ERM governance changes that would have reduced the crisis severity.
+\end{enumerate}
+
+\newpage
+\section{Case 6: Shell --- ERM at a large multinational}
+\subsection*{Context (excerpt)}
+Shell operates across upstream, integrated gas, chemicals, trading, power, and retail. Its ERM is principles-based, scenario-driven, and integrates risk into strategy and capital allocation.
+
+\subsection*{Exercise 3.6}
+Answer the following (short essay style, 200--400 words each):
+\begin{enumerate}
+  \item Characterize Shell's ERM framework: rules-based or principles-based? Compliance-oriented or decision-oriented? Support your answer with evidence.
+  \item Why does Shell use scenario analysis for long-term risks? What are the limits of quantitative measurement?
+  \item How is risk ownership and oversight allocated? When could this separation weaken risk management?
+  \item Identify three principal risks and explain how Shell integrates them into strategy.
+  \item Describe a plausible failure mode for Shell's ERM and the early warning signals you would monitor.
+\end{enumerate}
+
+\newpage
+\part*{Part III --- Group ERM Design Exercise}
+
+\section*{Group assignment (included)}
+\subsection*{Learning objective}
+Design a realistic ERM system for a complex, capital-intensive multinational. The exercise tests synthesis: governance, risk identification, measurement, response, and integration into strategy.
+
+\subsection*{Task}
+Prepare a 2--3 page ERM design proposal covering:
+\begin{enumerate}
+  \item ERM philosophy and scope (principles vs rules; focused vs comprehensive).
+  \item ERM architecture and governance (who owns risks, who oversees, escalation).
+  \item Risk identification and assessment (how to capture emerging and interacting risks).
+  \item Risk response and instruments (how to govern derivatives, insurance, contingent liquidity).
+  \item Integration into strategy and capital allocation.
+  \item Reporting, dashboards, and escalation rules.
+  \item Two plausible failure modes and early warning signals.
+\end{enumerate}
+
+\subsection*{Deliverable}
+A 2--3 page written proposal and a 10-minute group presentation. Include a one-page dashboard mock-up (PDF or slide) showing key indicators and escalation triggers.
+
+\bigskip
+\hrule
+\bigskip
+\noindent\textbf{End of student workbook.}
+\end{document}
