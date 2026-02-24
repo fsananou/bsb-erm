@@ -1,0 +1,315 @@
+%!TEX program = lualatex
+\documentclass[11pt]{article}
+\usepackage{hyperref}
+\usepackage{hyphenat}
+\usepackage{fontspec}
+\setmainfont{Carlito}
+\usepackage[scaled=.5]{helvet}
+\usepackage{courier}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{fancyvrb}
+\usepackage{enumitem}
+\setstretch{0.97}
+\geometry{margin=1in}
+
+\title{\textbf{Enterprise Risk Management --- Instructor Guide and Solutions}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+A mid-sized bank operates a trading desk managing a diversified market-risk portfolio with a total market value of \textbf{€100 million}. The bank has implemented an ERM framework centered on quantitative risk limits, with Value-at-Risk (VaR) as the primary risk metric.
+
+\bigskip
+\hrule
+\bigskip
+
+\section*{How to use this instructor guide}
+This instructor guide contains full solutions, teaching notes, common student mistakes, and suggested discussion prompts. The structure follows the student workbook but expands each exercise with worked calculations, interpretation, and pedagogical commentary. All data generation and calculations are described using Excel procedures so instructors can reproduce results in class without programming.
+
+\newpage
+\part*{Part I --- Risk Measurement Foundations (Solutions)}
+
+\section{Exercise 1.1 --- Conceptual VaR (Instructor notes)}
+\textbf{Model answer (short):}
+\begin{itemize}
+  \item VaR(1-day, 99\%) = \euro 10m means: under the model and normal market conditions, there is a 1\% probability that the portfolio will lose more than \euro 10m in one day.
+  \item Over 100 trading days, expect about 1 exceedance.
+  \item VaR does not describe the magnitude of losses beyond the threshold; it is a quantile, not an expected tail loss.
+  \item Examples of misleading situations: (1) heavy-tailed returns where extreme losses are much larger than VaR; (2) sudden correlation shifts that increase portfolio risk but are not captured by the VaR model.
+\end{itemize}
+
+\textbf{Teaching note:} Emphasize the difference between frequency (VaR) and severity (ES). Ask students to explain VaR to a non-technical board member in one sentence.
+
+\newpage
+\section{Exercise 1.2 --- Historical VaR with a realistic sample (Instructor solutions)}
+\subsection*{Excel dataset generation and sample outputs}
+\textbf{Excel steps recap:}
+\begin{enumerate}
+  \item Column D contains adjusted returns computed as \texttt{=NORM.INV(RAND(),0.0004,0.01) * (1 + 0.5*ABS(NORM.INV(RAND(),0,0.8)))} copied for 250 rows.
+  \item Inject negative jumps by subtracting 0.05, 0.08 or 0.12 at five chosen rows.
+  \item Column E contains losses: \texttt{= -D2}.
+  \item VaR95: \texttt{=PERCENTILE.EXC(E2:E251,0.95)}.
+  \item VaR99: \texttt{=PERCENTILE.EXC(E2:E251,0.99)}.
+  \item ES95: \texttt{=AVERAGEIF(E2:E251,">=" & cell_with_VaR95)}.
+  \item ES99: \texttt{=AVERAGEIF(E2:E251,">=" & cell_with_VaR99)}.
+\end{enumerate}
+
+\textbf{Example instructor outputs (representative):}
+\begin{itemize}
+  \item Historical VaR 95\% (loss fraction): 2.4\%
+  \item Historical VaR 99\% (loss fraction): 4.8\%
+  \item Historical ES 95\% (loss fraction): 3.5\%
+  \item Historical ES 99\% (loss fraction): 7.2\%
+  \item VaR99 in euros (portfolio \euro 50m): \euro 2.4m
+  \item ES99 in euros (portfolio \euro 50m): \euro 3.6m
+\end{itemize}
+
+\textbf{Pedagogical commentary:}
+\begin{itemize}
+  \item Show students how the PERCENTILE and AVERAGEIF functions work and why ES uses an average of tail losses.
+  \item Demonstrate backtesting: count breaches with \texttt{=COUNTIF(E2:E251, ">" & cell_with_VaR99)} and compare to expected breaches (250 * 1\% = 2.5).
+  \item Discuss sampling variability: repeat the random generation (recalculate) and show how VaR/ES move.
+\end{itemize}
+
+\textbf{Common student mistakes:}
+\begin{itemize}
+  \item Using \texttt{PERCENTILE.INC} vs \texttt{PERCENTILE.EXC} without understanding discrete-sample implications.
+  \item Averaging the wrong subset for ES (e.g., averaging returns rather than losses).
+  \item Forgetting to fix random seed equivalents in Excel (use manual values or document the chosen jump rows).
+\end{itemize}
+
+\newpage
+\section{Exercise 2.1 --- Parametric vs Historical VaR (Instructor solutions)}
+\textbf{Solution outline and Excel formulas:}
+\begin{enumerate}
+  \item Compute sample standard deviation: \texttt{=STDEV.S(D2:D251)}.
+  \item Parametric VaR99: \texttt{=NORM.S.INV(0.99) * stdev}.
+  \item Compare parametric VaR to historical VaR99 and discuss differences.
+  \item Stress test: compute recent 20-day volatility \texttt{=STDEV.S(D232:D251)}, double it, and recompute parametric VaR.
+\end{enumerate}
+
+\textbf{Teaching note:} Use this to show how parametric VaR underestimates tail risk when returns are non-normal.
+
+\newpage
+\part*{Part II --- Applied ERM Case Studies (Solutions and Teaching Notes)}
+
+\section{Case 1 solutions: Market risk, VaR limits and stress}
+\subsection*{Given (restated)}
+Equity exposure: \euro 60m, equity daily vol 2\% $\Rightarrow$ equity daily $\sigma_E = 60{,}000{,}000 \times 0.02 = \euro 1.2m$. \\
+Interest-rate exposure: \euro 40m, yield vol 5 bps, sensitivity +1 bp = \euro 0.20m $\Rightarrow$ yield daily $\sigma_{IR} = 0.20m \times 5 = \euro 1.0m$. Correlation = 0.
+
+\subsection*{1. VaR calculation (variance--covariance)}
+
+
+\[
+\sigma_P = \sqrt{\sigma_E^2 + \sigma_{IR}^2} = \sqrt{1.2^2 + 1.0^2} = 1.561\ \text{m}.
+\]
+
+
+1-day 99\% VaR (parametric) \(= 2.33 \times 1.561 = \mathbf{\euro 3.64m}\).
+
+\subsection*{2. Compliance}
+Limit = \euro 3.0m. VaR = \euro 3.64m $>$ limit $\Rightarrow$ \textbf{Not compliant}.
+
+\subsection*{3. Stress scenario}
+Equity loss: 60m * 8\% = \euro 4.8m. \\
+IR loss: 0.20m per bp * 30 bps = \euro 6.0m. \\
+Total stress loss = \euro 10.8m.
+
+\subsection*{4. Why stress loss can exceed VaR}
+\begin{itemize}
+  \item VaR is a quantile under normal assumptions; stress scenarios are deliberately outside those assumptions.
+  \item VaR ignores tail severity and assumes stable volatilities and correlations.
+  \item VaR is a one-day metric; stress scenarios can combine multiple drivers and non-linearities.
+\end{itemize}
+
+\subsection*{5. Two complementary ERM controls}
+\begin{enumerate}
+  \item Liquidity buffer sized by margin-at-risk and a requirement to stress liquidity under extreme scenarios.
+  \item Scenario limits and concentration limits that trigger mandatory reduction of exposures when breached.
+\end{enumerate}
+
+\textbf{Class activity:} Ask students to implement the VaR calculation in Excel and to create a small dashboard showing VaR, limit, and a red/yellow/green indicator.
+
+\newpage
+\section{Case 2 solutions: Expected Shortfall, governance and escalation}
+\subsection*{Data (sorted)}
+Sorted P\&L (worst to best): -6.8, -4.2, -3.5, -2.3, -1.7, -1.1, -0.8, -0.6, +0.4, +0.5, +0.6, +0.9.
+
+\subsection*{1--2. Empirical 1-day 99\% ES}
+With 12 observations, the discrete-sample interpretation places the 1\% tail on the single worst observation. ES$_{99}$ = \euro 6.8m.
+
+\subsection*{3. ES limit breach}
+Limit = \euro 4.0m. ES = \euro 6.8m $>$ limit $\Rightarrow$ \textbf{Breach}.
+
+\subsection*{4. Possible failures}
+\begin{itemize}
+  \item Risk reporting buried tail losses or used soft language.
+  \item Governance lacked automatic escalation triggers.
+  \item Incentives rewarded growth and discouraged early escalation.
+\end{itemize}
+
+\subsection*{5. Suggested escalation rule (example)}
+\begin{itemize}
+  \item Quantitative: ES$_{99}$ $>$ 75\% of limit $\Rightarrow$ immediate CRO notification and weekly committee review.
+  \item Qualitative: any single-day loss $>$ 50\% of limit $\Rightarrow$ immediate escalation.
+\end{itemize}
+
+\newpage
+\section{Case 3 solutions: Signals without escalation}
+\subsection*{1. ERM framework type}
+Principles-based, committee-driven, judgment-heavy.
+
+\subsection*{2. ERM architecture}
+\begin{itemize}
+  \item Risk-takers: business units.
+  \item Risk monitors: central risk function.
+  \item Escalation decision: senior committee (discretionary).
+\end{itemize}
+
+\subsection*{3. Early warning signals}
+Concentration, optimistic assumptions, frequent exceptions, stress tests near thresholds. They failed to trigger action due to soft language and lack of mandatory triggers.
+
+\subsection*{4. Incentives and culture}
+Examples: bonuses tied to growth; committees avoiding confrontation.
+
+\subsection*{5. Two governance changes}
+\begin{enumerate}
+  \item Hard escalation triggers with automatic routing to CRO/CEO.
+  \item Independent second-line authority with veto power over exceptions.
+\end{enumerate}
+
+\newpage
+\section{Case 4 solutions: Hedging effectiveness (prospective vs retrospective)}
+\subsection*{Given}
+Normal period: Var(X)=100, Var(H)=64, Cov=48. Stress period: Var(X)=225, Var(H)=144, Cov=12.
+
+\subsection*{1. Hedge ratio}
+
+
+\[
+h^* = \frac{\mathrm{Cov}(X,H)}{\mathrm{Var}(H)} = \frac{48}{64} = 0.75.
+\]
+
+
+
+\subsection*{2. Prospective effectiveness}
+
+
+\[
+\mathrm{Var}(Y) = 100 + 0.75^2 \cdot 64 - 2\cdot 0.75 \cdot 48 = 64.
+\]
+
+
+
+
+\[
+HE_{pros} = 1 - \frac{64}{100} = 36\%.
+\]
+
+
+
+\subsection*{3. Retrospective effectiveness}
+
+
+\[
+\mathrm{Var}(Y) = 225 + 0.75^2 \cdot 144 - 2\cdot 0.75 \cdot 12 = 288.
+\]
+
+
+
+
+\[
+HE_{retro} = 1 - \frac{288}{225} = -28\%.
+\]
+
+
+
+\subsection*{4. Why HE differs}
+Correlation collapse, volatility regime shift, and basis risk.
+
+\subsection*{5. Liquidity and governance}
+Average margin 18m < buffer 25m (sufficient on average). If spikes to 40m, require contingency lines, margin-at-risk limits, and dynamic hedging rules.
+
+\newpage
+\section{Case 5 solutions: When hedging increased risk}
+\subsection*{1. Main risks}
+Commodity price, basis, liquidity, funding, operational.
+
+\subsection*{2. Why hedge looked effective ex ante}
+Historical correlations and variance reduction metrics.
+
+\subsection*{3. Interpretation of $h^*$}
+Hedge 90\% of exposure assuming stable correlation.
+
+\subsection*{4. Why prospective effectiveness failed}
+Correlation breakdown, volatility spike, margin calls.
+
+\subsection*{5. Secondary risks ignored}
+Liquidity, funding, clearing, model risk.
+
+\subsection*{6. ERM governance changes}
+Liquidity stress tests, limits on margin exposure, contingent credit lines.
+
+\newpage
+\section{Case 6 solutions: Shell --- Instructor commentary}
+\subsection*{1. ERM characterization}
+Principles-based, decision-oriented; scenario-driven.
+
+\subsection*{2. Principal risks philosophy}
+Focus on material risks; trade-off: blind spots.
+
+\subsection*{3. Scenario analysis}
+Scenarios test resilience; not forecasts.
+
+\subsection*{4. Architecture and separation}
+Risk owners in business; central ERM provides challenge.
+
+\subsection*{5. Failure mode}
+Correlated geopolitical and commodity shock; early warnings: margin calls, basis widening, funding stress.
+
+\newpage
+\part*{Part III --- Group ERM Design Exercise (Instructor guidance)}
+\textbf{Suggested grading rubric (out of 20):}
+\begin{itemize}
+  \item Coherence of philosophy and scope: 3
+  \item Practicality of governance architecture: 4
+  \item Quality of risk identification and assessment: 4
+  \item Appropriateness of risk responses and instrument governance: 3
+  \item Integration into strategy and capital allocation: 3
+  \item Reporting and escalation design: 2
+  \item Anticipation of failure modes and early warnings: 1
+\end{itemize}
+
+\textbf{Instructor tips:}
+\begin{itemize}
+  \item Encourage students to be realistic and implementable.
+  \item Ask groups to present a one-page dashboard and explain each indicator.
+  \item Use the Excel dataset to illustrate how dashboards would have signalled rising risk.
+\end{itemize}
+
+\newpage
+\section*{Appendix: Synthetic dataset guidance and sample outputs}
+\textbf{Excel guidance:} The student workbook instructs how to create a 250-row synthetic return series in Excel and how to compute VaR/ES using \texttt{PERCENTILE.EXC} and \texttt{AVERAGEIF}. For instructor convenience, here are representative sample outputs you can expect when following the steps:
+
+\begin{itemize}
+  \item Historical VaR95\%: 2.4\% (loss fraction)
+  \item Historical VaR99\%: 4.8\% (loss fraction)
+  \item Historical ES95\%: 3.5\% (loss fraction)
+  \item Historical ES99\%: 7.2\% (loss fraction)
+  \item VaR99 (portfolio \euro 50m): \euro 2.4m
+  \item ES99 (portfolio \euro 50m): \euro 3.6m
+\end{itemize}
+
+\textbf{Final instructor note:} Use the student workbook in class for exercises and this guide to lead discussions. Encourage students to perform the Excel steps themselves and to experiment with alternative stress scenarios (e.g., correlation jumps, liquidity shocks). The goal is to build intuition about how numbers map to governance decisions.
+
+\bigskip
+\hrule
+\bigskip
+\noindent\textbf{End of instructor guide.}
+\end{document}
